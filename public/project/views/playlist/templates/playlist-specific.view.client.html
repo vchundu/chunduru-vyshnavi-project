@@ -1,0 +1,17 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+<div class="container-fluid">
+    <div class="col-md-4 hidden-sm hidden-xs">
+        <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
+    </div>
+    <div class="col-md-8">
+        <h1>{{model.playlist.name}}</h1>
+
+        <h3>Created by {{model.playlist._userCreated}} <span class="glyphicon glyphicon-lock pull-right" ng-show="!model.playlist.public"></span></h3>
+
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="song in model.playlist.songs">
+                <a ng-click="model.goToAlbum(song)">{{song}}</a> <!-- song.name for when you get mongo.populate to work -->
+            </li>
+        </ul>
+    </div>
+</div>

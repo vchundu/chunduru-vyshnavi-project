@@ -1,0 +1,4 @@
+<ul style="margin-top: 50px" class="list-group">
+    <li ng-repeat="playlist in model.playlists"
+        class="list-group-item"><span class="glyphicon glyphicon-lock pull-right" ng-show="!playlist.public"></span><a href="#!/user/{{model.userId}}/playlist/{{playlist._id}}">{{playlist.name}}</a></li>
+</ul>

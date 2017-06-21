@@ -1,0 +1,36 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <span class="navbar-text pull-left glyphicon glyphicon-home"></span>
+        <a class="navbar-brand" href="#!/login">Login</a>
+        <a class="navbar-brand" href="#!/register">Register</a>
+        <a class="navbar-brand" href="#">Profile</a>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="col-md-4 hidden-sm hidden-xs">
+        <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
+    </div>
+    <div class="col-md-8">
+        <img style="margin-top: 10px" src="http://lorempixel.com/300/350/" alt="" style="float:left">
+        <h1>{{model.user.username}}</h1>
+        <a href="#" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus pull-left"></span> Follow</a>
+
+        <!--TODO include list of listened to artists,
+            list of most listened to songs, list of followers, use tabs-->
+
+        <ul class="nav nav-tabs nav-justified">
+            <li role="presentation" class="active"><a href="#">Overview</a></li>
+            <li role="presentation"><a href="#">Recently Listened to</a></li>
+            <li role="presentation"><a href="#">Public Playlists</a></li>
+            <li role="presentation"><a href="#">Following</a></li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="playlist in model.publicPlaylists">{{playlist.name}}</li>
+        </ul>
+    </div>
+
+
+
+</div>
