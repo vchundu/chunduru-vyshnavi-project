@@ -3,13 +3,37 @@
         .module('VSpotify')
         .controller('profileController', profileController);
 
-    function profileController($routeParams, userService, playlistService) {
+    function profileController(currentUser, $location, userService, playlistService) {
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
 
-        model.user = userService.findUserById(model.userId);
-        model.publicPlaylists = playlistService.findPublicPlaylistsForUser(model.userId);
-        model.playlists = playlistService.findPlaylistsForUser(model.userId);
+        userService
+            .findUserById(model.userId)
+            .then(function(user) {
+                model.user = user;
+            });
 
+        playlistService
+            .findPublicPlaylistsForUser(model.userId)
+            .then(function(publicPlaylists) {
+                model.publicPlaylists = publicPlaylists;
+            });
+
+        playlistService
+            .findPlaylistsForUser(model.userId)
+            .then(function(playlists) {
+                model.playlists = playlists;
+            });
+
+        model.logout = logout;
+
+        function logout() {
+            userService
+                .logout()
+                .then(function(response){
+                    $location.url('/');
+                });
+
+        }
     }
 })();

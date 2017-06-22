@@ -10,17 +10,22 @@
                 templateUrl:'views/home/home.html'
             })
             .when('/login', {
-                templateUrl: 'views/user/templates/login.view.client.html'
+                templateUrl: 'views/user/templates/login.view.client.html',
+                controller: 'loginController',
+                controllerAs: 'model'
             })
             .when('/register', {
                 templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/profile/:userId', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser : checkLoggedIn
+                }
             })
             .when('/user/:userId/playlist/:playlistId', {
                 templateUrl: 'views/playlist/templates/playlist-specific.view.client.html',
@@ -32,5 +37,20 @@
                 controller: 'albumController',
                 controllerAs: 'model'
             });
+    }
+
+    function checkLoggedIn($q, $location, userService) {
+        var deferred = $q.defer();
+        userService
+            .checkLoggedIn()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
     }
 })();

@@ -6,6 +6,8 @@ var userModel = mongoose.model('UserModel', userSchema);
 userModel.createUser = createUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
+userModel.findUserById = findUserById;
+userModel.findUserByCredentials = findUserByCredentials;
 
 module.exports = userModel;
 
@@ -19,6 +21,21 @@ function findUserByFacebookId(facebookId) {
 }
 
 function findUserByUsername(username) {
-    console.log('in db');
     return userModel.findOne({"username": username});
+}
+
+function findUserById(userId) {
+    return userModel.findById(userId);
+}
+
+function findUserByCredentials(username, password) {
+    console.log('in database');
+    return userModel.findOne({"username": username})
+        .then(function(user) {
+        if (user && bcrypt.compareSync(password, user.password)) {
+            return user;
+        } else {
+            return null;
+        }
+    });
 }

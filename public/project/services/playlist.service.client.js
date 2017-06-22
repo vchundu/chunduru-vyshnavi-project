@@ -3,7 +3,7 @@
         .module('VSpotify')
         .factory('playlistService', playlistService);
 
-    function playlistService(songService) {
+    function playlistService(songService, $http) {
 
         var playlists = [
             {"name": "Summer 2k17", "_id": "456", "_userCreated": "123", "public": true,
@@ -20,24 +20,27 @@
         };
 
         function findPlaylistsForUser(userId) {
-            return playlists.filter(function(playlist) {
-                return playlist._userCreated === userId;
-            });
+            var url = "/api/project/user/"+userId+"/playlist";
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function findPublicPlaylistsForUser(userId) {
-            return playlists.filter(function(playlist) {
-                return playlist._userCreated === userId && playlist.public;
-            });
+            var url = "/api/project/user/"+userId+"/playlistPublic";
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function findPlaylistById(playlistId) {
-            for (var p in playlists) {
-                if (playlists[p]._id === playlistId) {
-                    return playlists[p];
-                }
-            }
-            return null;
+            var url = "/api/project/playlist/"+playlistId;
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function findAlbumForSong(songId) {

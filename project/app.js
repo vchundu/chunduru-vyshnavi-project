@@ -4,10 +4,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
-app.use(bodyParser);
+app.use(bodyParser.json());
 
 // Mongo
-var connectionString = 'mongodb://localhost/webdev_assignment'; // for local
+var connectionString = 'mongodb://localhost/webdev_project'; // for local
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
     var password = process.env.MLAB_PASSWORD_WEBDEV;
@@ -16,7 +16,6 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 }
 mongoose.connect(connectionString);
 
-
-
 // Local Requires
 require('./services/user.service.server');
+require('./services/playlist.server.service');

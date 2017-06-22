@@ -8,6 +8,10 @@
             {"name": "mom", "_artist": "789", "_album": "123", "_id": "124245"}
         ];
 
+
+        var apiKey = "75976284cdc3d5dddbf7f5ea3af59ca4";
+        var apiRoot = "https://ws.audioscrobbler.com/2.0/";
+
         return {
             findAlbumForSong : findAlbumForSong
         };
@@ -19,6 +23,10 @@
                 }
             }
             return null;
+        }
+
+        function findSong(artist, title) {
+
         }
     }
 })();
