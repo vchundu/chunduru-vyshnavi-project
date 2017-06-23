@@ -11,6 +11,7 @@ passport.deserializeUser(deserializeUser);
 // function
 
 // facebook strategy
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 // calls
 // gets
@@ -153,7 +154,7 @@ function localStrategy(username, password, done) {
 var facebookConfig = {
     clientID     : "248821795602346",
     clientSecret : "cf5d64e9bd59f22466baf885d334783c",
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    callbackURL  : "http://localhost:3000/auth/facebook/callback"
 };
 
 
@@ -162,4 +163,37 @@ app.get('/auth/facebook/callback',
         successRedirect: '/#!/profile',
         failureRedirect: '/#!/login'
     }));
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    console.log(profile);
+
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(function(user) {
+            if (user) {
+                return done(null, user);
+            } else {
+                console.log('am about to create a user');
+                var user = {
+                    username: profile.displayName.split(" ")[0],
+                    facebook: {
+                        id: profile.id,
+                        token: token
+                    }
+                };
+                return userModel
+                    .createUser(user);
+            }
+        }, function(err) {
+            return done(err);
+        })
+        .then(function(user) {
+            console.log('have created user and am sending him along');
+            return done(null, user);
+        }, function(err) {
+            return done(err);
+        })
+}
 
