@@ -3,12 +3,27 @@
         .module('VSpotify')
         .controller('albumController', albumController);
 
-    function albumController($routeParams, albumService, playlistService) {
+    function albumController(currentUser, $routeParams, lastFmService, playlistService) {
         var model = this;
-        model.albumId = $routeParams['albumId'];
-        model.userId = $routeParams['userId'];
 
-        model.album = albumService.findAlbumById(model.albumId);
-        model.playlists = playlistService.findPlaylistsForUser(model.userId);
+        if (currentUser !== '0') {
+            model.currentUser = currentUser;
+            model.userId = currentUser._id;
+        }
+
+        var albumArtist = $routeParams['albumArtist'].split("-").join(" ");
+        var albumTitle = $routeParams['albumTitle'].split("-").join(" ");
+
+        lastFmService
+            .findAlbum(albumArtist, albumTitle)
+            .then(function(album) {
+                model.album = album;
+            });
+
+        playlistService
+            .findPlaylistsForUser(model.userId)
+            .then(function(playlists) {
+                model.playlists = playlists;
+            });
     }
 })();

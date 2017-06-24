@@ -5,18 +5,12 @@
 
     function playlistService(songService, $http) {
 
-        var playlists = [
-            {"name": "Summer 2k17", "_id": "456", "_userCreated": "123", "public": true,
-                "songs" : ["124245", "23", "456"]},
-            {"name": "Summer Fcuk", "_id": "423", "_userCreated": "123", "public": false,
-                "songs" : ["124245", "23", "456"]}
-        ];
-
         return {
             findPlaylistsForUser: findPlaylistsForUser,
             findPublicPlaylistsForUser: findPublicPlaylistsForUser,
             findPlaylistById: findPlaylistById,
-            findAlbumForSong: findAlbumForSong
+            findAlbumForSong: findAlbumForSong,
+            createPlaylist : createPlaylist
         };
 
         function findPlaylistsForUser(userId) {
@@ -45,6 +39,14 @@
 
         function findAlbumForSong(songId) {
             return songService.findAlbumForSong(songId);
+        }
+
+        function createPlaylist(playlist) {
+            var url = "/api/project/playlist";
+            return $http.post(url, playlist)
+                .then(function(response) {
+                    return response.data;
+                })
         }
 
 

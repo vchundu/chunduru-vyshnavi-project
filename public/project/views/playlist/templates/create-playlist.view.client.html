@@ -1,3 +1,43 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
 <div class="container-fluid">
-    <input type="text">
+    <h1>Create a Playlist</h1>
+
+    <label for="title">Title</label>
+    <input type="text"
+           class="form-control"
+           ng-model="title"
+           id="title">
+
+    <label for="artist">Artist</label>
+    <input type="text"
+           id="artist"
+           class="form-control"
+           ng-model="artist">
+
+    <label for="track">Song Name</label>
+    <input type="text"
+           id="track"
+           class="form-control"
+           ng-model="track">
+
+    <label for="isPublic"
+           ng-if="model.currentUser._id">Make Public</label>
+    <input type="checkbox"
+           id="isPublic"
+           ng-model="isPublic"
+           ng-if="model.currentUser._id">
+
+    <a ng-click="model.addSong(track, artist)"
+       class="btn btn-block btn-warning">Add To Playlist</a>
+
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="song in model.songs"><em>{{song.title}}</em> by {{song.artist}}</li>
+    </ul>
+
+    <a ng-click="model.createPlaylist(title, model.songs, isPublic)"
+       class="btn btn-block btn-success"
+       ng-if="model.currentUser._id">Create Playlist</a>
+
 </div>

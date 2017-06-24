@@ -3,9 +3,10 @@
         .module('VSpotify')
         .controller('profileController', profileController);
 
-    function profileController(currentUser, $location, userService, playlistService) {
+    function profileController(currentUser, logoutService, userService, playlistService) {
         var model = this;
         model.userId = currentUser._id;
+        model.currentUser = currentUser;
 
         userService
             .findUserById(model.userId)
@@ -25,15 +26,6 @@
                 model.playlists = playlists;
             });
 
-        model.logout = logout;
-
-        function logout() {
-            userService
-                .logout()
-                .then(function(response){
-                    $location.url('/');
-                });
-
-        }
+        model.logout = logoutService.logout;
     }
 })();

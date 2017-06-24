@@ -15,7 +15,6 @@ app.use(passport.session());
 
 app.use(app.express.static(__dirname + '/public/project'));
 
-require('./test/app');
 require('./project/app');
 
 app.listen(process.env.PORT || 3000);

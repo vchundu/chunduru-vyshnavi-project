@@ -6,11 +6,11 @@
     <div class="col-md-8">
         <h1>{{model.playlist.name}}</h1>
 
-        <h3>Created by {{model.playlist._userCreated}} <span class="glyphicon glyphicon-lock pull-right" ng-show="!model.playlist.public"></span></h3>
+        <h3>Created by {{model.user}} <span class="glyphicon glyphicon-lock pull-right" ng-show="!model.playlist.public"></span></h3>
 
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="song in model.playlist.songs">
-                <a ng-click="model.goToAlbum(song)">{{song}}</a> <!-- song.name for when you get mongo.populate to work -->
+            <li class="list-group-item" ng-repeat="song in model.playlist._songs">
+                <a ng-click="model.goToArtist(song)"><em>{{song.track}}</em> by {{song.artist}}</a> <!-- song.name for when you get mongo.populate to work -->
             </li>
         </ul>
     </div>

@@ -6,7 +6,7 @@ var playlistSchema = mongoose.Schema({
     public: Boolean,
     _songs: [
         {
-            title: {type: String, require: true},
+            track: {type: String, require: true},
             artist: {type: String, require: true}
         }
     ],

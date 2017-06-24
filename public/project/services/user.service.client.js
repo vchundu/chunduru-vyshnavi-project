@@ -30,20 +30,11 @@
                 .then(function(response) {
                     return response.data;
                 });
-            // for (var u in users) {
-            //     if (users[u]._id === id) {
-            //         return users[u];
-            //     }
-            // }
-            // return null;
         }
 
         function register(user) {
             user.roles = ["USER"];
             user._following = [];
-            // user.playlists = [];
-            // users.push(user);
-            // return user;
             var url = "/api/project/register";
             return $http.post(url, user)
                 .then(function(response) {
@@ -51,14 +42,6 @@
                 });
         }
 
-        // function login(username, password) {
-        //     var url= "/api/project/credentials/user?username="+username+"&password="+password;
-        //     console.log('in client service');
-        //     return $http.get(url)
-        //         .then(function(response) {
-        //             return response.data;
-        //         });
-        // }
 
         function login(username, password) {
             var url= "/api/project/login";

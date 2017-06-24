@@ -1,0 +1,65 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <h1>Create a Playlist</h1>
+
+    <p>Note: All inputs are case sensitive and must be spelled correctly.</p>
+
+    <input type="text"
+           id="title"
+           ng-model="title"
+           placeholder="Title"
+           class="form-control">
+
+    <label for="length">Length of Playlist</label>
+    <input type="time"
+           id="length"
+           ng-model="length"
+           class="form-control">
+
+    <div class="input-group">
+        <input id="newTag"
+               type="text"
+               ng-model="model.newTag"
+               placeholder="Add a Tag"
+               class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-default"
+                    type="button"
+                    ng-click="model.addTag(model.newTag)">Add</button>
+        </span>
+    </div>
+
+    <div class="input-group">
+        <input type="text"
+               id="newArtist"
+               ng-model="model.newArtist"
+               class="form-control"
+               placeholder="Add an Artist">
+        <span class="input-group-btn">
+            <button class="btn btn-default"
+                    type="button"
+                    ng-click="model.addArtist(model.newArtist)">Add</button>
+        </span>
+    </div>
+
+    <h3>Tags</h3>
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="tag in model.tags">{{tag}}
+            <span class="glyphicon glyphicon-remove pull-right"
+                  ng-click="model.removeTag($index)"></span>
+        </li>
+    </ul>
+
+    <h3>Artists</h3>
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="artist in model.artists">{{artist}}
+            <span class="glyphicon glyphicon-remove pull-right"
+                  ng-click="model.removeArtist($index)"></span></li>
+    </ul>
+
+    <a ng-click="model.createPlaylist(title, time, model.tags, model.artists)"
+       class="btn btn-block btn-success">Create</a>
+</div>

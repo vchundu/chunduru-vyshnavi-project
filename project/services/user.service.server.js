@@ -12,6 +12,7 @@ passport.deserializeUser(deserializeUser);
 
 // facebook strategy
 var FacebookStrategy = require('passport-facebook').Strategy;
+app.get('/auth/facebook', passport.authenticate('facebook', {'scope': 'email'}));
 
 // calls
 // gets
@@ -19,11 +20,17 @@ app.get('/api/project/username/user', findUserByUsername);
 app.get('/api/project/user/:userId', findUserById);
 app.get('/api/project/credentials/user', findUserByCredentials);
 app.get('/api/project/checkLoggedIn', checkLoggedIn);
-app.get('/auth/facebook', passport.authenticate('facebook', {'scope': 'email'}));
+app.get('/api/project/admin/users', findAllUsers);
+app.get('/api/project/admin/user/:userId', findUserById);
 //posts
 app.post('/api/project/register', register);
 app.post('/api/project/login', passport.authenticate('local'), login);
 app.post('/api/project/logout', logout);
+app.post('/api/project/admin/user', createUser);
+//delete
+app.delete('/api/project/admin/user/:userId', deleteUser);
+//puts
+app.put('/api/project/admin/user/:userId', updateUser);
 
 //functions
 function findUserByUsername(req, res) {
@@ -84,6 +91,16 @@ function checkLoggedIn(req, res){
     }
 }
 
+function findAllUsers(req, res) {
+    userModel
+        .findAllUsers()
+        .then(function(users) {
+            res.json(users);
+        }, function(error) {
+            res.sendStatus(404);
+        })
+}
+
 
 function register(req, res)  {
     var user = req.body;
@@ -105,6 +122,18 @@ function login(req, res) {
 function logout(req, res) {
     req.logOut();
     res.sendStatus(200);
+}
+
+function createUser(req, res) {
+    var user = req.body;
+
+    userModel
+        .createUser(user)
+        .then(function(user) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        })
 }
 // passport things
 passport.serializeUser(serializeUser);
@@ -132,7 +161,6 @@ function deserializeUser(user, done) {
 passport.use(new LocalStrategy(localStrategy));
 
 function localStrategy(username, password, done) {
-    console.log('in local strategy');
     userModel
         .findUserByCredentials(username, password)
         .then(
@@ -167,7 +195,6 @@ app.get('/auth/facebook/callback',
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    console.log(profile);
 
     userModel
         .findUserByFacebookId(profile.id)
@@ -175,7 +202,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
             if (user) {
                 return done(null, user);
             } else {
-                console.log('am about to create a user');
                 var user = {
                     username: profile.displayName.split(" ")[0],
                     facebook: {
@@ -190,10 +216,35 @@ function facebookStrategy(token, refreshToken, profile, done) {
             return done(err);
         })
         .then(function(user) {
-            console.log('have created user and am sending him along');
             return done(null, user);
         }, function(err) {
             return done(err);
         })
 }
+
+function deleteUser(req, res) {
+    var userId = req.params['userId'];
+
+    userModel
+        .deleteUser(userId)
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
+function updateUser(req, res) {
+    var userId = req.params['userId'];
+    var user = req.body;
+
+    userModel
+        .updateUser(userId, user)
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
 

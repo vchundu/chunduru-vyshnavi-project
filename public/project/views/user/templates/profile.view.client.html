@@ -1,12 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <span class="navbar-text pull-left glyphicon glyphicon-home"></span>
-        <a class="navbar-brand" href="#!/login">Login</a>
-        <a class="navbar-brand" href="#!/register">Register</a>
-        <a class="navbar-brand" href="#">Profile</a>
-        <a class="navbar-brand" on-click="model.logout()"></a>
-    </div>
-</nav>
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
 
 <div class="container-fluid">
 
@@ -16,7 +8,7 @@
     <div class="col-md-8">
         <img style="margin-top: 10px" src="http://lorempixel.com/300/350/" alt="" style="float:left">
         <h1>{{model.user.username}}</h1>
-        <a href="#" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus pull-left"></span> Follow</a>
+        <a ng-click="" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus pull-left"></span> Follow</a>
 
         <!--TODO include list of listened to artists,
             list of most listened to songs, list of followers, use tabs-->

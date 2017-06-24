@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="VSpotify">
 <head>
+
     <meta charset="UTF-8">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!--External Files-->
     <!--JS-->
     <script src="vendor/js/angular/angular.min.js"></script>
@@ -19,18 +21,35 @@
     <script src="app.js"></script>
     <script src="config.js"></script>
     <!--Controllers-->
+    <!--User-->
     <script src="views/user/controllers/register.controller.client.js"></script>
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
+    <!--Playlist-->
     <script src="views/playlist/controllers/playlist.controller.client.js"></script>
+    <script src="views/playlist/controllers/generate-playlist.controller.client.js"></script>
+    <script src="views/playlist/controllers/create-playlist.controller.client.js"></script>
+    <!--Admin-->
+    <script src="views/admin/controllers/admin.controller.client.js"></script>
+    <script src="views/admin/controllers/admin-users.controller.client.js"></script>
+    <script src="views/admin/controllers/admin-user-edit.controller.client.js"></script>
+    <script src="views/admin/controllers/admin-playlists.controller.client.js"></script>
+    <!--Search-->
+    <script src="views/search/controllers/search.controller.client.js"></script>
+    <!--Other-->
     <script src="views/album/controllers/album.controller.client.js"></script>
     <script src="views/artist/controllers/artist.controller.client.js"></script>
+
     <!--Services-->
     <script src="services/user.service.client.js"></script>
     <script src="services/playlist.service.client.js"></script>
     <script src="services/song.service.client.js"></script>
+    <script src="services/logout.service.client.js"></script>
+    <script src="services/admin.service.client.js"></script>
     <script src="services/album.service.client.js"></script>
     <script src="services/artist.service.client.js"></script>
+    <script src="services/search.service.client.js"></script>
+    <script src="services/last.fm.service.client.js"></script>
 
     <title>Project</title>
 </head>

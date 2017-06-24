@@ -1,0 +1,62 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <label for="search" class="h1">Search</label>
+    <div class="input-group">
+        <input type="text"
+               id="search"
+               ng-model="searchTerm"
+               class="form-control"
+               placeholder="e.g. Meghan Trainor">
+        <span class="input-group-btn">
+            <button class="btn btn-default"
+                    type="button"
+                    ng-click="model.search(searchTerm)">Search</button>
+        </span>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="active list-group-item">Songs</li>
+                <li class="list-group-item"
+                    ng-repeat="song in model.songs"><em>{{song.name}} </em> by {{song.artist}} </li>
+            </ul>
+            <a class="btn btn-block btn-info">See More Songs</a>
+
+            <ul class="list-group">
+                <li class="active list-group-item">Artists</li>
+                <li class="list-group-item"
+                    ng-repeat="artist in model.artists">{{artist.name}}</li>
+            </ul>
+            <a class="btn btn-block btn-info">See More Artists</a>
+        </div>
+
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item active">Albums</li>
+                <li class="list-group-item"
+                    ng-repeat="album in model.albums"><em>{{album.name}}</em> by {{album.artist}}</li>
+            </ul>
+            <a class="btn btn-block btn-info">See More Albums</a>
+
+            <ul class="list-group">
+                <li class="list-group-item active">Playlists</li>
+                <li class="list-group-item"
+                    ng-repeat="playlist in model.playlists">{{playlist}}</li>
+            </ul>
+            <a class="btn btn-block btn-info">See More Playlists</a>
+        </div>
+
+
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item active">Users</li>
+        <li class="list-group-item"
+            ng-repeat="user in model.users"></li>
+    </ul>
+
+
+
+</div>

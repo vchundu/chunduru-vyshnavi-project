@@ -8,6 +8,9 @@ userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserById = findUserById;
 userModel.findUserByCredentials = findUserByCredentials;
+userModel.findAllUsers = findAllUsers;
+userModel.deleteUser = deleteUser;
+userModel.updateUser = updateUser;
 
 module.exports = userModel;
 
@@ -29,13 +32,30 @@ function findUserById(userId) {
 }
 
 function findUserByCredentials(username, password) {
-    console.log('in database');
     return userModel.findOne({"username": username})
         .then(function(user) {
         if (user && bcrypt.compareSync(password, user.password)) {
             return user;
         } else {
             return null;
+        }
+    });
+}
+
+function findAllUsers() {
+    return userModel.find();
+}
+
+function deleteUser(userId) {
+    return userModel.remove({"_id": userId});
+}
+
+function updateUser(userId, user) {
+
+    return userModel.update({_id: userId}, {
+        $set: {
+            username: user.username,
+            roles : user.roles
         }
     });
 }

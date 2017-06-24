@@ -1,0 +1,12 @@
+<ul class="list-group">
+    <li class="active list-group-item">All Users</li>
+    <li class="list-group-item"
+        ng-repeat="user in model.users">{{user.username}}
+
+        <span class="glyphicon glyphicon-remove pull-right"
+              ng-click="model.deleteUser(user)"></span>
+        <a href="#!/admin/user/{{user._id}}">
+            <span class="glyphicon glyphicon-pencil pull-right"></span>
+        </a>
+    </li>
+</ul>

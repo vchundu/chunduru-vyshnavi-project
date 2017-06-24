@@ -1,0 +1,39 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <div class="col-sm-4">
+        <div ng-include="'views/admin/templates/includes/admin-users-list.view.client.html'"></div>
+    </div>
+
+    <div class="col-sm-8">
+        <h1>{{model.title}}</h1>
+
+        <label for="username">Username</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               ng-model="model.user.username">
+
+        <label for="password"
+               ng-if="model.isNew">Password</label>
+        <input type="text"
+               class="form-control"
+               id="password"
+               ng-model="model.user.password"
+               ng-if="model.isNew">
+
+        <label for="makeAdmin">Make them an Admin</label>
+        <input type="checkbox"
+               id="makeAdmin"
+               ng-model="model.isAdmin"
+               ng-checked="model.isAdmin">
+
+        <a class="btn btn-primary btn-block"
+           ng-if="!model.isNew"
+           ng-click="model.updateUser(model.user)">Update User</a>
+
+        <a class="btn btn-success btn-block"
+           ng-if="model.isNew"
+           ng-click="model.createUser(model.user)">Create User</a>
+    </div>
+</div>

@@ -21,7 +21,6 @@
             }
 
             function userFound(user) {
-                console.log(user);
                 model.message = "The username " + username + " is already taken";
             }
 

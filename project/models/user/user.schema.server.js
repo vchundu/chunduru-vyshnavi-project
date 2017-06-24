@@ -10,6 +10,12 @@ var userSchema = mongoose.Schema({
     _following: [
         {type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}
     ],
+    _followers: [
+        {type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}
+    ],
+    _playlists: [
+        {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"}
+    ],
     roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}]
 }, {collection: "user"});
 
