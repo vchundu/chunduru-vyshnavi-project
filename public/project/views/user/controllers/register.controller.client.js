@@ -7,7 +7,11 @@
 
         var model = this;
 
-        model.register = register;
+        function init() {
+            model.register = register;
+        }
+        init();
+
 
         function register(username, password, verifyPassword) {
             model.message = "";

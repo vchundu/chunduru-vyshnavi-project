@@ -18,6 +18,7 @@ userModel.followPlaylist = followPlaylist;
 userModel.unfollowPlaylist = unfollowPlaylist;
 userModel.addPlaylist = addPlaylist;
 userModel.searchUsers = searchUsers;
+userModel.findPlaylistsUserFollows = findPlaylistsUserFollows;
 
 module.exports = userModel;
 
@@ -133,4 +134,12 @@ function addPlaylist(userId, playlistId) {
 function searchUsers(searchText) {
     return userModel
         .find({$or : [{"username": searchText}, {"firstname": searchText}, {"lastname":searchText}]});
+}
+
+function findPlaylistsUserFollows(userId) {
+    console.log('in model');
+    return userModel
+        .findById(userId)
+        .populate("_playlists")
+        .exec();
 }

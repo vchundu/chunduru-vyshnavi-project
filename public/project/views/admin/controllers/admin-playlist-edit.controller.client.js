@@ -8,36 +8,41 @@
                                          $location) {
 
         var model = this;
-        model.currentUser = currentUser;
-        model.logout = logoutService;
         var playlistId = $routeParams['playlistId'];
 
-        adminService
-            .findAllPlaylists()
-            .then(function(playlists) {
-                model.playlists = playlists;
-            });
+        function init() {
+            model.currentUser = currentUser;
+            model.logout = logoutService;
 
-        if (playlistId === "new") {
-            model.title = "Create Playlist";
-            model.isNew = true;
-            model.playlist = {};
-            model.playlist._userCreated = currentUser._id;
-            model.playlist._songs = [];
-        } else {
-            model.title = "Edit Playlist";
-            model.isNew = false;
             adminService
-                .findPlaylistById(playlistId)
-                .then(function(playlist) {
-                    model.playlist=playlist;
-                })
+                .findAllPlaylists()
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                });
+
+            if (playlistId === "new") {
+                model.title = "Create Playlist";
+                model.isNew = true;
+                model.playlist = {};
+                model.playlist._userCreated = currentUser._id;
+                model.playlist._songs = [];
+            } else {
+                model.title = "Edit Playlist";
+                model.isNew = false;
+                adminService
+                    .findPlaylistById(playlistId)
+                    .then(function(playlist) {
+                        model.playlist=playlist;
+                    })
+            }
+
+            model.updatePlaylist = updatePlaylist;
+            model.createPlaylist = createPlaylist;
+            model.addSong = addSong;
+            model.removeSong = removeSong;
         }
 
-        model.updatePlaylist = updatePlaylist;
-        model.createPlaylist = createPlaylist;
-        model.addSong = addSong;
-        model.removeSong = removeSong;
+        init();
 
         function updatePlaylist(playlist) {
             adminService

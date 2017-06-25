@@ -5,31 +5,42 @@
 
     function playlistEditController(currentUser, $routeParams,
                                     $location, playlistService,
-                                    logoutService) {
+                                    logoutService, userService) {
         var model = this;
         var playlistId = $routeParams['playlistId'];
-        model.logout = logoutService.logout;
-        model.currentUser = currentUser;
-        model.addSong = addSong;
-        model.removeSong = removeSong;
-        model.updatePlaylist = updatePlaylist;
 
-        playlistService
-            .findPlaylistById(playlistId)
-            .then(function(playlist) {
-                if (playlist._userCreated !== currentUser._id) {
-                    logoutService.logout();
-                    $location.url('/login');
-                } else {
-                    model.playlist = playlist;
-                }
-            });
+        function init() {
+            model.logout = logoutService.logout;
+            model.currentUser = currentUser;
+            model.addSong = addSong;
+            model.removeSong = removeSong;
+            model.updatePlaylist = updatePlaylist;
 
-        playlistService
-            .findPlaylistsForUser(currentUser._id)
-            .then(function(playlists) {
-                model.playlists = playlists;
-            });
+            playlistService
+                .findPlaylistById(playlistId)
+                .then(function(playlist) {
+                    if (playlist._userCreated !== currentUser._id) {
+                        logoutService.logout();
+                        $location.url('/login');
+                    } else {
+                        model.playlist = playlist;
+                    }
+                });
+
+            playlistService
+                .findPlaylistsForUser(currentUser._id)
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                });
+
+            userService
+                .findPlaylistsUserFollows(currentUser._id)
+                .then(function(playlists) {
+                    console.log('found playlists');
+                    model.followPlaylists = playlists;
+                });
+        }
+        init();
 
         function addSong(track, artist) {
             var song = {

@@ -6,10 +6,14 @@
     function searchController(currentUser, searchService, logoutService, $location) {
         var model = this;
 
-        model.currentUser = currentUser;
-        model.search = search;
-        model.logout = logoutService.logout;
-        model.getLink = getLink;
+        function init() {
+            model.currentUser = currentUser;
+            model.search = search;
+            model.logout = logoutService.logout;
+            model.getLink = getLink;
+
+        }
+        init();
 
         function search(searchTerm) {
             searchService

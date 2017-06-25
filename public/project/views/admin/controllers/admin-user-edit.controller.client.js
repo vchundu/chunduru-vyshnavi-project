@@ -5,31 +5,35 @@
 
     function adminUserEditController(currentUser, $routeParams, adminService, $location) {
         var userId = $routeParams['userId'];
-
         var model = this;
-        adminService
-            .findAllUsers()
-            .then(function(users) {
-                model.users = users;
-            });
 
-        if (userId === "new") {
-            model.isNew = true;
-            model.title = "Create User";
-            model.isAdmin = false;
-        } else {
-            model.isNew = false;
+        function init() {
             adminService
-                .findUserById(userId)
-                .then(function(user) {
-                    model.user = angular.copy(user);
-                    model.title = "Edit User";
-                    model.isAdmin = user.roles.indexOf('ADMIN') > -1;
+                .findAllUsers()
+                .then(function(users) {
+                    model.users = users;
                 });
-        }
 
-        model.updateUser = updateUser;
-        model.createUser = createUser;
+            if (userId === "new") {
+                model.isNew = true;
+                model.title = "Create User";
+                model.isAdmin = false;
+            } else {
+                model.isNew = false;
+                adminService
+                    .findUserById(userId)
+                    .then(function (user) {
+                        model.user = angular.copy(user);
+                        model.title = "Edit User";
+                        model.isAdmin = user.roles.indexOf('ADMIN') > -1;
+                    });
+            }
+
+            model.updateUser = updateUser;
+            model.createUser = createUser;
+        }
+        init();
+
 
         function updateUser(user) {
             checkAdmin(user);

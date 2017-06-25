@@ -6,7 +6,10 @@
     function adminController(currentUser, logoutService) {
         var model =this;
 
-        model.currentUser = currentUser;
-        model.logout=logoutService.logout;
+        function init() {
+            model.currentUser = currentUser;
+            model.logout = logoutService.logout;
+        }
+        init();
     }
 })();

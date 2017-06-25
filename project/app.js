@@ -18,4 +18,4 @@ mongoose.connect(connectionString);
 
 // Local Requires
 require('./services/user.service.server');
-require('./services/playlist.server.service');
+require('./services/playlist.service.server');

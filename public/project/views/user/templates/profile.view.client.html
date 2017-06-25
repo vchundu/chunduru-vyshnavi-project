@@ -2,17 +2,17 @@
 
 <div class="container-fluid">
 
-    <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="col-sm-3 hidden-xs">
         <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-9">
         <div class="row">
             <div class="col-sm-7">
                 <h1>{{model.user.firstname}} {{model.user.lastname}}</h1>
                 <h2>{{model.user.username}}</h2>
 
                 <a class="btn btn-danger"
-                   ng-if="model.showEdit"
+                   ng-if="model.showEid"
                    href="#!/profile/{{model.user.username}}">Edit Profile
                     <span class="glyphicon glyphicon-pencil pull-right"></span>
                 </a>
@@ -28,6 +28,9 @@
                     Unfollow
                     <span class="glyphicon glyphicon-minus pull-left"></span>
                 </a>
+
+                <h4>Following {{model.following}}</h4>
+                <h4>Followed by {{model.followers}}</h4>
             </div>
             <div class="col-sm-5">
                 <img src="http://lorempixel.com/300/300/" alt="">
@@ -40,7 +43,7 @@
 
 
         <ul class="list-group">
-            <li class="active list-group-item">Public Playlists</li>
+            <li class="vs-active list-group-item">Public Playlists</li>
             <li class="list-group-item" ng-repeat="playlist in model.publicPlaylists">
                 <a href="#!/playlist/{{playlist._id}}">{{playlist.name}}</a></li>
         </ul>

@@ -6,17 +6,19 @@
     function adminUsersController(currentUser, adminService, logoutService) {
         var model = this;
 
-        model.logout = logoutService.logout;
-        model.currentUser = currentUser;
+        function init() {
+            model.logout = logoutService.logout;
+            model.currentUser = currentUser;
 
-        adminService
-            .findAllUsers()
-            .then(function(users) {
-                model.users = users;
-            });
+            adminService
+                .findAllUsers()
+                .then(function(users) {
+                    model.users = users;
+                });
 
-        model.deleteUser = deleteUser;
-
+            model.deleteUser = deleteUser;
+        }
+        init();
         function deleteUser(user) {
             if (confirm("Are you sure you want to delete " + user.username + "'s account?")) {
                 adminService

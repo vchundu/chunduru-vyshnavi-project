@@ -7,36 +7,43 @@
                               $routeParams, lastFmService,
                               playlistService, logoutService) {
         var model = this;
-
-        model.logout = logoutService.logout;
-        model.goToAlbum = goToAlbum;
         var artistName = $routeParams['artistName'].replace("-", " ");
 
-        if (currentUser !== '0') {
-            model.currentUser = currentUser;
-            playlistService
-                .findPlaylistsForUser(currentUser._id);
+        function init() {
+            model.logout = logoutService.logout;
+            model.goToAlbum = goToAlbum;
+
+            if (currentUser !== '0') {
+                model.currentUser = currentUser;
+                playlistService
+                    .findPlaylistsForUser(currentUser._id)
+                    .then(function(playlists) {
+                        model.playlists = playlists;
+                    })
+
+            }
+
+            lastFmService
+                .findArtist(artistName)
+                .then(function(artist) {
+                    model.artist = artist;
+                    model.image = artist.image[3]['#text'];
+                });
+
+            lastFmService
+                .findArtistTopAlbums(artistName)
+                .then(function(albums) {
+                    model.albums = albums;
+                });
+
+            lastFmService
+                .findArtistTopTracks(artistName)
+                .then(function(tracks) {
+                    model.tracks = tracks;
+                });
 
         }
-
-        lastFmService
-            .findArtist(artistName)
-            .then(function(artist) {
-                model.artist = artist;
-                model.image = artist.image[3]['#text'];
-            });
-
-        lastFmService
-            .findArtistTopAlbums(artistName)
-            .then(function(albums) {
-                model.albums = albums;
-            });
-
-        lastFmService
-            .findArtistTopTracks(artistName)
-            .then(function(tracks) {
-                model.tracks = tracks;
-            });
+        init();
 
         function goToAlbum(album) {
             var name = album.name.split(" ").join("-");

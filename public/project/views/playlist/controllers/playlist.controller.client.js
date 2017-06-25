@@ -7,42 +7,46 @@
                                 $routeParams, currentUser,
                                 lastFmService, $location, logoutService) {
         var model = this;
-
-        if(currentUser !== '0') {
-            model.currentUser = currentUser;
-        }
-
-        model.userId = currentUser._id;
         model.playlistId = $routeParams['playlistId'];
 
-        playlistService
-            .findPlaylistById(model.playlistId)
-            .then(function(playlist) {
-                model.playlist = playlist;
-                return userService.findUserById(playlist._userCreated);
-            })
-            .then(function(user) {
-                model.user = user.username;
-                if (currentUser !== '0') {
-                    model.showEdit = user._id === currentUser._id;
-                    model.showFollow = user._id !== currentUser._id;
-                    console.log(model.showFollow);
-                } else {
-                    model.showEdit = false;
-                    model.showFollow = false;
-                }
-            });
+        function init() {
+            model.logout = logoutService.logout;
+            model.goToArtist = goToArtist;
+            model.followPlaylist = followPlaylist;
+            model.unfollowPlaylist = unfollowPlaylist;
 
-        playlistService
-            .findPlaylistsForUser(model.userId)
-            .then(function(playlists) {
-                model.playlists = playlists;
-            });
+            if(currentUser !== '0') {
+                model.currentUser = currentUser;
+            }
 
-        model.logout = logoutService.logout;
-        model.goToArtist = goToArtist;
-        model.followPlaylist = followPlaylist;
-        model.unfollowPlaylist = unfollowPlaylist;
+            model.userId = currentUser._id;
+
+            playlistService
+                .findPlaylistById(model.playlistId)
+                .then(function(playlist) {
+                    model.playlist = playlist;
+                    return userService.findUserById(playlist._userCreated);
+                })
+                .then(function(user) {
+                    model.user = user.username;
+                    if (currentUser !== '0') {
+                        model.showEdit = user._id === currentUser._id;
+                        model.showFollow = user._id !== currentUser._id;
+                        console.log(model.showFollow);
+                    } else {
+                        model.showEdit = false;
+                        model.showFollow = false;
+                    }
+                });
+
+            playlistService
+                .findPlaylistsForUser(model.userId)
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                });
+
+        }
+        init();
 
         function goToArtist(song) {
             lastFmService

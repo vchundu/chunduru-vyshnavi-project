@@ -11,7 +11,10 @@
         <a ng-click="model.unfollowPlaylist()"
            class="btn btn-danger"
            ng-if="!model.showFollow">Unfollow Playlist</a>
-        <h3>Created by {{model.user}}
+        <h3>
+            <a href="#!/user/{{model.user}}">
+                Created by {{model.user}}
+            </a>
             <span class="glyphicon glyphicon-lock pull-right"
                   ng-show="!model.playlist.public"></span>
             <a href="#!/playlist/edit/{{model.playlistId}}">

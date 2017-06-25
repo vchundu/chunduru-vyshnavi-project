@@ -7,37 +7,39 @@
         var model = this;
         var otherUsername = $routeParams['username'];
 
-        if (currentUser !== '0') {
-            model.currentUser = currentUser;
-            model.showEdit = currentUser.username === otherUsername;
+        function init() {
+            model.logout = logoutService.logout;
+            model.followUser = followUser;
+            model.unfollowUser = unfollowUser;
 
-            playlistService
-                .findPlaylistsForUser(currentUser._id)
-                .then(function(playlists) {
-                    model.playlists= playlists;
+            if (currentUser !== '0') {
+                model.currentUser = currentUser;
+                model.showEdit = currentUser.username === otherUsername;
+
+                playlistService
+                    .findPlaylistsForUser(currentUser._id)
+                    .then(function(playlists) {
+                        model.playlists= playlists;
+                    });
+            }
+
+            userService
+                .findUserByUsername(otherUsername)
+                .then(function(user) {
+                    model.user = user;
+                    model.followers = user._followers.length;
+                    model.following = user._following.length;
+                    if (currentUser !== '0') {
+                        model.isFollow = currentUser._following.indexOf(user._id) > -1;
+                    }
+                    return playlistService
+                        .findPublicPlaylistsForUser(user._id);
+                })
+                .then(function(publicPlaylists) {
+                    model.publicPlaylists = publicPlaylists;
                 });
         }
-
-        userService
-            .findUserByUsername(otherUsername)
-            .then(function(user) {
-                model.user = user;
-
-                if (currentUser !== '0') {
-                    model.isFollow = currentUser._following.indexOf(user._id) > -1;
-                }
-                return playlistService
-                    .findPublicPlaylistsForUser(user._id);
-            })
-            .then(function(publicPlaylists) {
-                model.publicPlaylists = publicPlaylists;
-            });
-
-
-
-        model.logout = logoutService.logout;
-        model.followUser = followUser;
-        model.unfollowUser = unfollowUser;
+        init();
 
         function followUser() {
             userService

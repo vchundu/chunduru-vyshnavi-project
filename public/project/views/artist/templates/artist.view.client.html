@@ -1,16 +1,16 @@
 <div ng-include="'views/common/templates/header.view.client.html'"></div>
 
 <div class="container-fluid row">
-    <div class="col-md-4" ng-if="model.currentUser._id">
+    <div class="col-sm-4 hidden-xs" ng-if="model.currentUser._id">
         <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
         <img ng-src="{{model.image}}" alt="">
         <h1>{{model.artist.name}}</h1>
 
         <div class="col-md-6">
             <ul class="list-group">
-                <li class="active list-group-item">Top Tracks</li>
+                <li class="vs-active list-group-item">Top Tracks</li>
                 <li class="list-group-item"
                     ng-repeat="track in model.tracks">{{track.name}}</li>
             </ul>
@@ -18,10 +18,10 @@
 
         <div class="col-md-6">
             <ul class="list-group">
-                <li class="active list-group-item">Top Albums</li>
+                <li class="vs-active list-group-item">Top Albums</li>
                 <li class="list-group-item"
                     ng-repeat="album in model.albums">
-                    <a ng-click="model.goToAlbum(album)">{{album.name}}</a>
+                    <span ng-click="model.goToAlbum(album)">{{album.name}}</span>
                 </li>
             </ul>
         </div>

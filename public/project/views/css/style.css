@@ -25,3 +25,11 @@ body {
     background-repeat: no-repeat;
     background-color: #5e5e5e;
 }
+
+.vs-active {
+    background-color: #A9A9A9;
+}
+
+span :hover{
+    text-decoration: underline;
+}

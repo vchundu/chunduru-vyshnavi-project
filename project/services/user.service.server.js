@@ -23,6 +23,7 @@ app.get('/api/project/checkLoggedIn', checkLoggedIn);
 app.get('/api/project/admin/users', findAllUsers);
 app.get('/api/project/admin/user/:userId', findUserById);
 app.get('/api/project/search/users/:searchText', searchUsers);
+app.get('/api/project/user/playlists/follow/:userId', findPlaylistsUserFollows);
 //posts
 app.post('/api/project/register', register);
 app.post('/api/project/login', passport.authenticate('local'), login);
@@ -119,6 +120,18 @@ function searchUsers(req, res) {
         });
 }
 
+function findPlaylistsUserFollows(req, res) {
+    console.log('in server');
+    var userId = req.params['userId'];
+    userModel
+        .findPlaylistsUserFollows(userId)
+        .then(function(user) {
+            console.log(user);
+            res.json(user._playlists);
+        }, function(error) {
+            res.sendStatus(404);
+        })
+}
 
 function register(req, res)  {
     var user = req.body;

@@ -16,7 +16,8 @@
             unfollowUser : unfollowUser,
             followPlaylist: followPlaylist,
             unfollowPlaylist: unfollowPlaylist,
-            updateUser: updateUser
+            updateUser: updateUser,
+            findPlaylistsUserFollows: findPlaylistsUserFollows
         };
 
         function findUserByUsername(username) {
@@ -130,10 +131,14 @@
                 });
         }
 
-
-
-
-
-
+        function findPlaylistsUserFollows(userId) {
+            console.log('in client service');
+            var url ="/api/project/user/playlists/follow/"+userId;
+            return $http.get(url)
+                .then(function(response){
+                    console.log(response.data);
+                    return response.data;
+                })
+        }
     }
 })();

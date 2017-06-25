@@ -8,22 +8,24 @@
                                    playlistService, $location) {
         var model = this;
 
-        model.logout = logoutService.logout;
-        model.currentUser = currentUser;
+        function init() {
+            model.logout = logoutService.logout;
+            model.currentUser = currentUser;
+            model.showEdit = showEdit;
+            model.updateUser = updateUser;
+            model.removePlaylist = removePlaylist;
 
-        if (currentUser.username !== $routeParams['username']) {
-            logoutService.logout();
+            if (currentUser.username !== $routeParams['username']) {
+                logoutService.logout();
+            }
+
+            playlistService
+                .findPlaylistsForUser(currentUser._id)
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                });
         }
-
-        playlistService
-            .findPlaylistsForUser(currentUser._id)
-            .then(function(playlists) {
-                model.playlists = playlists;
-            });
-
-        model.showEdit = showEdit;
-        model.updateUser = updateUser;
-        model.removePlaylist = removePlaylist;
+        init();
 
         function showEdit(playlist) {
             return playlist._userCreated === currentUser._id;

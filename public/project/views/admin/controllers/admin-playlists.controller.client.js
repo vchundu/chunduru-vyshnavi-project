@@ -6,16 +6,19 @@
     function adminPlaylistsController(currentUser, adminService, logoutService) {
         var model = this;
 
-        model.logout = logoutService.logout;
-        model.currentUser = currentUser;
+        function init() {
+            adminService
+                .findAllPlaylists()
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                });
 
-        adminService
-            .findAllPlaylists()
-            .then(function(playlists) {
-                model.playlists = playlists;
-            });
+            model.logout = logoutService.logout;
+            model.currentUser = currentUser;
+            model.deletePlaylist = deletePlaylist;
+        }
 
-        model.deletePlaylist = deletePlaylist;
+        init();
 
         function deletePlaylist(playlist) {
             adminService
