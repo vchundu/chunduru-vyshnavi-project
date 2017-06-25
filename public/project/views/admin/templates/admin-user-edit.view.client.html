@@ -22,6 +22,24 @@
                ng-model="model.user.password"
                ng-if="model.isNew">
 
+        <label for="firstname">First Name</label>
+        <input type="text"
+               class="form-control"
+               id="firstname"
+               ng-model="model.user.firstname">
+
+        <label for="lastname">Last Name</label>
+        <input type="text"
+               class="form-control"
+               id="lastname"
+               ng-model="model.user.lastname">
+
+        <label for="email">Email</label>
+        <input type="text"
+               class="form-control"
+               id="email"
+               ng-model="model.user.email">
+
         <label for="makeAdmin">Make them an Admin</label>
         <input type="checkbox"
                id="makeAdmin"

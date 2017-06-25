@@ -3,7 +3,9 @@
         .module('VSpotify')
         .controller('albumController', albumController);
 
-    function albumController(currentUser, $routeParams, lastFmService, playlistService) {
+    function albumController(currentUser, $routeParams,
+                             lastFmService, playlistService,
+                             $location) {
         var model = this;
 
         if (currentUser !== '0') {
@@ -28,5 +30,12 @@
             .then(function(playlists) {
                 model.playlists = playlists;
             });
+
+        model.getLink = getLink;
+
+        function getLink(artistName) {
+            artistName = artistName.split(" ").join("-");
+            $location.url('/artist/'+artistName);
+        }
     }
 })();

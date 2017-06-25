@@ -107,6 +107,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/playlist/:playlistId', {
+                templateUrl: 'views/admin/templates/admin-playlist-edit.view.client.html',
+                controller: 'adminPlaylistEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/search', {
                 templateUrl: 'views/search/templates/search.view.client.html',
                 controller: 'searchController',

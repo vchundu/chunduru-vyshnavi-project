@@ -29,7 +29,10 @@ function findPlaylistById(playlistId) {
 }
 
 function findAllPlaylists() {
-    return playlistModel.find();
+    return playlistModel
+        .find()
+        .populate("_userCreated")
+        .exec();
 }
 
 function createPlaylist(playlist) {

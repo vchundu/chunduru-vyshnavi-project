@@ -1,0 +1,56 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <div class="col-sm-4 hidden-xs">
+        <div ng-include="'views/admin/templates/includes/admin-playlists-list.view.client.html'"></div>
+    </div>
+    <div class="col-sm-8">
+        <h1>{{model.title}}</h1>
+
+        <label for="name">Name of Playlist</label>
+        <input type="text"
+               id="name"
+               class="form-control"
+               ng-model="model.playlist.name">
+
+        <label for="isPublic">Make this Public</label>
+        <input type="checkbox"
+               id="isPublic"
+               ng-model="model.playlist.public"
+               ng-checked="model.playlist.public">
+
+        <h4>Add New Song</h4>
+        <label for="track">Title</label>
+        <input type="text"
+               id="track"
+               class="form-control"
+               ng-model="song.track">
+        <label for="artist">Artist</label>
+        <input type="text"
+               id="artist"
+               class="form-control"
+               ng-model="song.artist">
+
+        <a ng-click="model.addSong(song)"
+           class="btn btn-block btn-warning">Add Song</a>
+
+        <a ng-click="model.updatePlaylist(model.playlist)"
+           ng-if="!model.isNew"
+           class="btn btn-block btn-primary">Update Playlist</a>
+
+        <a ng-click="model.createPlaylist(model.playlist)"
+           ng-if="model.isNew"
+           class="btn btn-block btn-success">Create Playlist</a>
+
+        <ul class="list-group">
+            <li class="active list-group-item">Songs in Playlist</li>
+            <li class="list-group-item"
+                ng-repeat="song in model.playlist._songs">
+                <em>{{song.track}}</em> by {{song.artist}}
+                <span class="pull-right glyphicon-remove glyphicon"
+                      ng-click="model.removeSong($index)"></span>
+            </li>
+        </ul>
+
+    </div>
+</div>

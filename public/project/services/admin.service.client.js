@@ -11,7 +11,11 @@
             deleteUser : deleteUser,
             findUserById : findUserById,
             updateUser : updateUser,
-            createUser : createUser
+            createUser : createUser,
+            findPlaylistById : findPlaylistById,
+            updatePlaylist: updatePlaylist,
+            createPlaylist: createPlaylist,
+            deletePlaylist: deletePlaylist
         };
 
         function findAllPlaylists() {
@@ -57,6 +61,38 @@
         function createUser(user) {
             var url = "/api/project/admin/user";
             return $http.post(url, user)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function findPlaylistById(playlistId) {
+            var url = "/api/project/admin/playlist/"+playlistId;
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function updatePlaylist(playlistId, playlist) {
+            var url = "/api/project/admin/playlist/"+playlistId;
+            return $http.put(url, playlist)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function createPlaylist(playlist) {
+            var url = "/api/project/admin/playlist";
+            return $http.post(url, playlist)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function deletePlaylist(playlistId) {
+            var url = "/api/project/admin/playlist/"+playlistId;
+            return $http.delete(url)
                 .then(function(response) {
                     return response.data;
                 });

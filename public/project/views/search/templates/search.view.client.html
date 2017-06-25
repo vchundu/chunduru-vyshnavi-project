@@ -21,14 +21,20 @@
             <ul class="list-group">
                 <li class="active list-group-item">Songs</li>
                 <li class="list-group-item"
-                    ng-repeat="song in model.songs"><em>{{song.name}} </em> by {{song.artist}} </li>
+                    ng-repeat="song in model.songs">
+
+                    <em>{{song.name}} </em> by <a ng-click="model.getLink('artist',song.artist)">{{song.artist}}</a>
+                </li>
             </ul>
             <a class="btn btn-block btn-info">See More Songs</a>
 
             <ul class="list-group">
                 <li class="active list-group-item">Artists</li>
                 <li class="list-group-item"
-                    ng-repeat="artist in model.artists">{{artist.name}}</li>
+                    ng-repeat="artist in model.artists">
+                    <a ng-click="model.getLink('artist', artist.name)"></a>
+                    {{artist.name}}
+                </li>
             </ul>
             <a class="btn btn-block btn-info">See More Artists</a>
         </div>
@@ -37,7 +43,9 @@
             <ul class="list-group">
                 <li class="list-group-item active">Albums</li>
                 <li class="list-group-item"
-                    ng-repeat="album in model.albums"><em>{{album.name}}</em> by {{album.artist}}</li>
+                    ng-repeat="album in model.albums">
+                    <a ng-click="model.getLink('album', album.name)"></a>
+                    <em>{{album.name}}</em> by {{album.artist}}</li>
             </ul>
             <a class="btn btn-block btn-info">See More Albums</a>
 

@@ -1,5 +1,13 @@
 <ul class="list-group">
     <li class="active list-group-item">All Playlists</li>
     <li class="list-group-item"
-        ng-repeat="playlist in model.playlists">{{playlist}}</li>
+        ng-repeat="playlist in model.playlists">
+        <strong>{{playlist.name}}</strong> created by {{playlist._userCreated.username}}
+
+        <span class="glyphicon-remove glyphicon pull-right"
+              ng-click="model.deletePlaylist(playlist)"></span>
+        <a href="#!/admin/playlist/{{playlist._id}}">
+            <span class="glyphicon-pencil glyphicon pull-right"></span>
+        </a>
+    </li>
 </ul>

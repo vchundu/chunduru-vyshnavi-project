@@ -4,14 +4,18 @@ var playlistModel = require('../models/playlist/playlist.model.server');
 app.get('/api/project/user/:userId/playlist', findPlaylistsForUser);
 app.get('/api/project/user/:userId/playlistPublic', findPublicPlaylistsForUser);
 app.get('/api/project/playlist/:playlistId', findPlaylistById);
+app.get('/api/project/admin/playlist/:playlistId', findPlaylistById);
 app.get('/api/project/admin/playlists', findAllPlaylists);
 app.get('/api/project/search/playlists/:searchText', searchPlaylists);
 
 app.post('/api/project/playlist', createPlaylist);
+app.post('/api/project/admin/playlist', createPlaylist);
 
 app.put('/api/project/playlist/:playlistId', updatePlaylist);
+app.put('/api/project/admin/playlist/:playlistId', updatePlaylist);
 
 app.delete('/api/project/playlist/:playlistId', deletePlaylist);
+app.delete('/api/project/admin/playlist/:playlistId', deletePlaylist);
 
 function findPlaylistsForUser(req, res) {
     var userId = req.params['userId'];
@@ -84,6 +88,7 @@ function createPlaylist(req, res) {
 }
 
 function updatePlaylist(req, res) {
+    console.log('made it into the update');
     var playlistId = req.params['playlistId'];
     var playlist = req.body;
 

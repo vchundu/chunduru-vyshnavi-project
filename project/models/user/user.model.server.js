@@ -50,7 +50,8 @@ function findUserByCredentials(username, password) {
 }
 
 function findAllUsers() {
-    return userModel.find();
+    return userModel
+        .find();
 }
 
 function deleteUser(userId) {
