@@ -1,0 +1,62 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+
+    <div class="col-md-4 hidden-sm hidden-xs">
+        <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
+    </div>
+    <div class="col-md-8">
+
+        <label for="image">Edit Image URL</label>
+        <input type="text"
+               ng-model="model.currentUser.image"
+               class="form-control"
+               id="image">
+
+        <label for="username">Edit Username</label>
+        <input type="text"
+               ng-model="model.currentUser.username"
+               class="form-control"
+               id="username">
+
+        <label for="firstname">Edit First Name</label>
+        <input type="text"
+               ng-model="model.currentUser.firstname"
+               class="form-control"
+               id="firstname">
+
+        <label for="lastname">Edit Last Name</label>
+        <input type="text"
+               ng-model="model.currentUser.lastname"
+               class="form-control"
+               id="lastname">
+
+        <label for="email">Edit Email</label>
+        <input type="text"
+               ng-model="model.currentUser.email"
+               class="form-control"
+               id="email">
+
+        <a ng-click="model.updateUser(model.currentUser)"
+           class="btn btn-block btn-success">Save Changes</a>
+
+        <ul class="list-group">
+            <li class="list-group-item active">Edit Playlists</li>
+            <li class="list-group-item" ng-repeat="playlist in model.playlists">
+                <a href="#!/playlist/{{playlist._id}}">
+                    {{playlist.name}}
+                </a>
+                <span class="glyphicon glyphicon-remove pull-right"
+                      ng-click="model.removePlaylist(playlist)"></span>
+                <a href="#!/playlist/edit/{{playlist._id}}">
+                    <span class="glyphicon glyphicon-pencil pull-right"
+                          ng-if="model.showEdit(playlist)"></span>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>

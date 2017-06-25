@@ -1,0 +1,52 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+
+    <div class="col-md-4 hidden-sm hidden-xs">
+        <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
+    </div>
+
+    <div class="col-md-8">
+        <label for="name">Edit Playlist Name</label>
+        <input type="text"
+               class="form-control"
+               id="name"
+               ng-model="model.playlist.name">
+
+        <label for="isPublic">Make Public</label>
+        <input type="checkbox"
+               id="isPublic"
+               ng-model="model.playlist.public"
+               ng-checked="model.playlist.public">
+
+        <h3>Add New Songs</h3>
+        <label for="track">Title</label>
+        <input type="text"
+               class="form-control"
+               id="track"
+               ng-model="track">
+
+        <label for="Artist">Artist</label>
+        <input type="text"
+               class="form-control"
+               id="artist"
+               ng-model="artist">
+
+        <a ng-click="model.addSong(track, artist)"
+           class="btn btn-block btn-success">Add Song</a>
+
+        <a ng-click="model.updatePlaylist(model.playlist)"
+           class="btn btn-block btn-primary">Update Playlist</a>
+
+        <ul class="list-group">
+            <li class="list-group-item active">Edit Songs</li>
+            <li class="list-group-item" ng-repeat="song in model.playlist._songs">
+                <em>{{song.track}}</em> by {{song.artist}}
+                <span class="glyphicon glyphicon-remove pull-right"
+                      ng-click="model.removeSong(song)"></span>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+</div>

@@ -8,8 +8,10 @@
 
     <!--External Files-->
     <!--JS-->
+    <script src="vendor/js/jquery/dist/jquery.min.js"></script>
     <script src="vendor/js/angular/angular.min.js"></script>
     <script src="vendor/js/angular/angular-route.min.js"></script>
+    <script src="vendor/js/bootstrap/bootstrap.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="vendor/css/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/css/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -25,9 +27,11 @@
     <script src="views/user/controllers/register.controller.client.js"></script>
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
+    <script src="views/user/controllers/profile-edit.controller.client.js"></script>
+    <script src="views/user/controllers/other-user.controller.client.js"></script>
     <!--Playlist-->
     <script src="views/playlist/controllers/playlist.controller.client.js"></script>
-    <script src="views/playlist/controllers/generate-playlist.controller.client.js"></script>
+    <script src="views/playlist/controllers/playlist-edit.controller.client.js"></script>
     <script src="views/playlist/controllers/create-playlist.controller.client.js"></script>
     <!--Admin-->
     <script src="views/admin/controllers/admin.controller.client.js"></script>
@@ -54,6 +58,6 @@
     <title>Project</title>
 </head>
 <body>
-    <div ng-view></div>
+        <div ng-view></div>
 </body>
 </html>

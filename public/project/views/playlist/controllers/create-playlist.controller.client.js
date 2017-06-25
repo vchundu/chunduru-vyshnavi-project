@@ -21,6 +21,7 @@
         }
 
         function createPlaylist(title, songs, isPublic) {
+            console.log('in client');
             var playlist = {
                 "_userCreated" : currentUser._id,
                 "public": isPublic,

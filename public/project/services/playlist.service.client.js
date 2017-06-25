@@ -10,7 +10,9 @@
             findPublicPlaylistsForUser: findPublicPlaylistsForUser,
             findPlaylistById: findPlaylistById,
             findAlbumForSong: findAlbumForSong,
-            createPlaylist : createPlaylist
+            createPlaylist : createPlaylist,
+            removePlaylist: removePlaylist,
+            updatePlaylist: updatePlaylist
         };
 
         function findPlaylistsForUser(userId) {
@@ -42,12 +44,31 @@
         }
 
         function createPlaylist(playlist) {
+            console.log('in client service');
             var url = "/api/project/playlist";
             return $http.post(url, playlist)
                 .then(function(response) {
                     return response.data;
+                });
+        }
+
+        function removePlaylist(playlistId) {
+            var url = "/api/project/playlist/"+playlistId;
+            return $http.delete(url)
+                .then(function(response) {
+                    return response.data;
                 })
         }
+
+        function updatePlaylist(playlistId, playlist) {
+            console.log('in client service');
+            var url = "/api/project/playlist/"+playlistId;
+            return $http.put(url, playlist)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
 
 
     }

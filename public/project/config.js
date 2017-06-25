@@ -27,6 +27,14 @@
                     currentUser : checkLoggedIn
                 }
             })
+            .when('/profile/:username', {
+                templateUrl: 'views/user/templates/profile-edit.view.client.html',
+                controller: 'profileEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             .when('/user/:username', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'otherUserController',
@@ -43,7 +51,15 @@
                     currentUser: checkAnonymous
                 }
             })
-            .when('album/:albumTitle/:albumArtist', {
+            .when('/playlist/edit/:playlistId', {
+                templateUrl: 'views/playlist/templates/playlist-edit.view.client.html',
+                controller: 'playlistEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/album/:albumTitle/:albumArtist', {
                 templateUrl: 'views/album/templates/album.view.client.html',
                 controller: 'albumController',
                 controllerAs: 'model',
@@ -54,14 +70,6 @@
             .when('/artist/:artistName', {
                 templateUrl: 'views/artist/templates/artist.view.client.html',
                 controller: 'artistController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkAnonymous
-                }
-            })
-            .when('/generate', {
-                templateUrl: 'views/playlist/templates/generate-playlist.view.client.html',
-                controller: 'generatePlaylistController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkAnonymous
@@ -104,7 +112,7 @@
                 controller: 'searchController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkAnonymous
                 }
             })
             .when('/create', {

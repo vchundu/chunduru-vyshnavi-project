@@ -11,7 +11,12 @@
             register: register,
             login: login,
             checkLoggedIn: checkLoggedIn,
-            logout: logout
+            logout: logout,
+            followUser: followUser,
+            unfollowUser : unfollowUser,
+            followPlaylist: followPlaylist,
+            unfollowPlaylist: unfollowPlaylist,
+            updateUser: updateUser
         };
 
         function findUserByUsername(username) {
@@ -66,6 +71,65 @@
                     return response.data;
                 });
         }
+
+        function followUser(currentUserId, wantsToFollowId) {
+            var url = "/api/project/user/follow";
+            var ids = {
+                "currentUserId" :currentUserId,
+                "wantsToFollowId" : wantsToFollowId
+            };
+            return $http.put(url, ids)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function unfollowUser(currentUserId, wantsToUnfollowId) {
+            var url = "/api/project/user/unfollow";
+            var ids = {
+                "currentUserId" :currentUserId,
+                "wantsToUnfollowId" : wantsToUnfollowId
+            };
+            return $http.put(url, ids)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function followPlaylist(userId, playlistId) {
+            var url = "/api/project/user/playlist/follow";
+            var ids = {
+                "userId":userId,
+                "playlistId":playlistId
+            };
+
+            return $http.put(url, ids)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function unfollowPlaylist(userId, playlistId) {
+            console.log('service clien');
+            var url = "/api/project/user/playlist/unfollow";
+            var ids = {
+                "userId":userId,
+                "playlistId":playlistId
+            };
+            return $http.put(url, ids)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function updateUser(userId, user) {
+            var url ="/api/project/user/"+userId;
+            return $http.put(url, user)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
 
 
 

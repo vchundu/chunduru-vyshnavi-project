@@ -3,11 +3,12 @@
         .module('VSpotify')
         .controller('searchController', searchController);
 
-    function searchController(currentUser, searchService) {
+    function searchController(currentUser, searchService, logoutService) {
         var model = this;
 
         model.currentUser = currentUser;
         model.search = search;
+        model.logout = logoutService.logout;
 
         function search(searchTerm) {
             searchService
@@ -20,11 +21,24 @@
                 .searchAlbums(searchTerm)
                 .then(function(albums) {
                     model.albums = albums;
-                })
+                });
+
             searchService
                 .searchArtists(searchTerm)
                 .then(function(artists) {
                     model.artists =artists;
+                });
+
+            searchService
+                .searchPlaylists(searchTerm)
+                .then(function(playlists) {
+                    model.playlists = playlists;
+                })
+
+            searchService
+                .searchUsers(searchTerm)
+                .then(function(users) {
+                    model.users= users;
                 })
         }
     }

@@ -22,6 +22,7 @@ app.get('/api/project/credentials/user', findUserByCredentials);
 app.get('/api/project/checkLoggedIn', checkLoggedIn);
 app.get('/api/project/admin/users', findAllUsers);
 app.get('/api/project/admin/user/:userId', findUserById);
+app.get('/api/project/search/users/:searchText', searchUsers);
 //posts
 app.post('/api/project/register', register);
 app.post('/api/project/login', passport.authenticate('local'), login);
@@ -31,6 +32,11 @@ app.post('/api/project/admin/user', createUser);
 app.delete('/api/project/admin/user/:userId', deleteUser);
 //puts
 app.put('/api/project/admin/user/:userId', updateUser);
+app.put('/api/project/user/follow', followUser);
+app.put('/api/project/user/unfollow', unfollowUser);
+app.put("/api/project/user/playlist/follow", followPlaylist);
+app.put("/api/project/user/playlist/unfollow", unfollowPlaylist);
+app.put("/api/project/user/:userId", updateUser);
 
 //functions
 function findUserByUsername(req, res) {
@@ -50,6 +56,7 @@ function findUserByUsername(req, res) {
 }
 
 function findUserById(req, res) {
+
     var userId = req.params.userId;
 
     userModel
@@ -99,6 +106,17 @@ function findAllUsers(req, res) {
         }, function(error) {
             res.sendStatus(404);
         })
+}
+
+function searchUsers(req, res) {
+    var searchText  = req.params['searchText'];
+    userModel
+        .searchUsers(searchText)
+        .then(function(users) {
+            res.json(users);
+        }, function(error) {
+            res.sendStatus(404);
+        });
 }
 
 
@@ -246,5 +264,52 @@ function updateUser(req, res) {
             res.sendStatus(404);
         });
 }
+
+function followUser(req, res) {
+    var ids = req.body;
+    userModel
+        .followUser(ids['currentUserId'], ids['wantsToFollowId'])
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        })
+}
+
+function unfollowUser(req, res) {
+    var ids = req.body;
+    userModel
+        .unfollowUser(ids['currentUserId'], ids['wantsToUnfollowId'])
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        })
+}
+
+function followPlaylist(req, res) {
+    var ids = req.body;
+    userModel
+        .followPlaylist(ids['userId'], ids['playlistId'])
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
+function unfollowPlaylist(req, res) {
+
+    console.log('made it to unfollow playlis servert');
+    var ids = req.body;
+    userModel
+        .unfollowPlaylist(ids['userId'], ids['playlistId'])
+        .then(function(response) {
+            res.sendStatus(200);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
 
 

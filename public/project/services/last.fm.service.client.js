@@ -32,8 +32,6 @@
         }
 
         function searchArtists(searchText) {
-            console.log('inside search artists');
-            console.log(searchText);
             var url = apiRoot+"?method=artist.search&artist="
                 +searchText+"&api_key="+apiKey
                 +"&format=json&limit=10";
@@ -63,7 +61,7 @@
 
             return $http.get(url)
                 .then(function(response) {
-                    console.log(response);
+                    return response.data.album;
                 });
         }
 
@@ -86,7 +84,6 @@
                     + "&api_key="+apiKey
                     + "&format=json";
 
-            console.log('in findArtist');
             return $http.get(url)
                 .then(function(response){
                     return response.data.artist;

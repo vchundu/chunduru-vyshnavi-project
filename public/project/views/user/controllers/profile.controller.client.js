@@ -7,12 +7,8 @@
         var model = this;
         model.userId = currentUser._id;
         model.currentUser = currentUser;
-
-        userService
-            .findUserById(model.userId)
-            .then(function(user) {
-                model.user = user;
-            });
+        model.user = currentUser;
+        model.image = currentUser.image;
 
         playlistService
             .findPublicPlaylistsForUser(model.userId)

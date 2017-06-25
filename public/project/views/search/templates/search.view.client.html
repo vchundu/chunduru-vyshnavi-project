@@ -14,7 +14,7 @@
                     ng-click="model.search(searchTerm)">Search</button>
         </span>
     </div>
-
+    <p>Note: For users, and playlists, the search term must be exact. </p>
     <div class="row">
 
         <div class="col-md-6">
@@ -44,7 +44,11 @@
             <ul class="list-group">
                 <li class="list-group-item active">Playlists</li>
                 <li class="list-group-item"
-                    ng-repeat="playlist in model.playlists">{{playlist}}</li>
+                    ng-repeat="playlist in model.playlists">
+                    <a href="#!/playlist/{{playlist._id}}">
+                        {{playlist.name}}
+                    </a>
+                </li>
             </ul>
             <a class="btn btn-block btn-info">See More Playlists</a>
         </div>
@@ -54,7 +58,11 @@
     <ul class="list-group">
         <li class="list-group-item active">Users</li>
         <li class="list-group-item"
-            ng-repeat="user in model.users"></li>
+            ng-repeat="user in model.users">
+            <a href="#!/user/{{user.username}}">
+                {{user.username}}, {{user.firstname}} {{user.lastname}}
+            </a>
+        </li>
     </ul>
 
 

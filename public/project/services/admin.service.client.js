@@ -18,7 +18,6 @@
             var url = "/api/project/admin/playlists";
             return $http.get(url)
                 .then(function(response) {
-                    console.log(response.data);
                     return response.data;
                 });
         }

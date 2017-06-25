@@ -42,7 +42,6 @@
             playlistService
                 .createPlaylist(title, time, tags, artists)
                 .then(function(playlist) {
-                    console.log(playlist);
                 })
         }
     }

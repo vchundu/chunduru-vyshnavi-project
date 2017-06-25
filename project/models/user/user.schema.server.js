@@ -3,6 +3,10 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
     username: {type: String, require: true},
     password: {type: String, require: true},
+    firstname: String,
+    lastname: String,
+    image: {type: String, default: "http://lorempixel.com/300/350/"},
+    email: String,
     facebook: {
         id:    String,
         token: String

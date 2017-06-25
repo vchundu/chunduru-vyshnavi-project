@@ -12,7 +12,6 @@
         adminService
             .findAllPlaylists()
             .then(function(playlists) {
-                console.log(playlists);
                 model.playlists = playlists;
             })
     }

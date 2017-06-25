@@ -5,8 +5,20 @@
     </div>
     <div class="col-md-8">
         <h1>{{model.playlist.name}}</h1>
-
-        <h3>Created by {{model.user}} <span class="glyphicon glyphicon-lock pull-right" ng-show="!model.playlist.public"></span></h3>
+        <a ng-click="model.followPlaylist()"
+           class="btn btn-success"
+           ng-if="model.showFollow">Follow Playlist</a>
+        <a ng-click="model.unfollowPlaylist()"
+           class="btn btn-danger"
+           ng-if="!model.showFollow">Unfollow Playlist</a>
+        <h3>Created by {{model.user}}
+            <span class="glyphicon glyphicon-lock pull-right"
+                  ng-show="!model.playlist.public"></span>
+            <a href="#!/playlist/edit/{{model.playlistId}}">
+                <span ng-if="model.showEdit"
+                      class="glyphicon glyphicon-pencil"></span>
+            </a>
+        </h3>
 
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="song in model.playlist._songs">

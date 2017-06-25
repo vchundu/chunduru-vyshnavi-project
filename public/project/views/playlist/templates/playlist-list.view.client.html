@@ -1,4 +1,5 @@
-<ul style="margin-top: 50px" class="list-group">
+<ul class="list-group">
+    <li class="active list-group-item">Playlists (Only Visible To You)</li>
     <li ng-repeat="playlist in model.playlists"
         class="list-group-item"><span class="glyphicon glyphicon-lock pull-right" ng-show="!playlist.public"></span><a href="#!/playlist/{{playlist._id}}">{{playlist.name}}</a></li>
 </ul>

@@ -2,25 +2,47 @@
 
 <div class="container-fluid">
 
-    <div class="col-md-4 hidden-sm hidden-xs">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
     </div>
-    <div class="col-md-8">
-        <img style="margin-top: 10px" src="http://lorempixel.com/300/350/" alt="" style="float:left">
-        <h1>{{model.user.username}}</h1>
-        <a ng-click="" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus pull-left"></span> Follow</a>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-sm-7">
+                <h1>{{model.user.firstname}} {{model.user.lastname}}</h1>
+                <h2>{{model.user.username}}</h2>
 
-        <!--TODO include list of listened to artists,
-            list of most listened to songs, list of followers, use tabs-->
+                <a class="btn btn-danger"
+                   ng-if="model.showEdit"
+                   href="#!/profile/{{model.user.username}}">Edit Profile
+                    <span class="glyphicon glyphicon-pencil pull-right"></span>
+                </a>
+                <a ng-click="model.followUser()"
+                   ng-if="!model.isFollow"
+                   class="btn btn-sm btn-default">
+                    Follow
+                    <span class="glyphicon glyphicon-plus pull-left"></span>
+                </a>
+                <a ng-click="model.unfollowUser()"
+                   ng-if="model.isFollow"
+                   class="btn btn-sm btn-default">
+                    Unfollow
+                    <span class="glyphicon glyphicon-minus pull-left"></span>
+                </a>
+            </div>
+            <div class="col-sm-5">
+                <img src="http://lorempixel.com/300/300/" alt="">
+            </div>
+        </div>
 
-        <ul class="nav nav-tabs nav-justified">
-            <li role="presentation" class="active"><a href="#">Overview</a></li>
-            <li role="presentation"><a href="#">Recently Listened to</a></li>
-            <li role="presentation"><a href="#">Public Playlists</a></li>
-            <li role="presentation"><a href="#">Following</a></li>
-        </ul>
+
+
+
+
+
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="playlist in model.publicPlaylists">{{playlist.name}}</li>
+            <li class="active list-group-item">Public Playlists</li>
+            <li class="list-group-item" ng-repeat="playlist in model.publicPlaylists">
+                <a href="#!/playlist/{{playlist._id}}">{{playlist.name}}</a></li>
         </ul>
     </div>
 

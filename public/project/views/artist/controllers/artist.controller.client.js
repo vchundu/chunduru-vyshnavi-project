@@ -22,7 +22,6 @@
         lastFmService
             .findArtist(artistName)
             .then(function(artist) {
-                console.log(artist);
                 model.artist = artist;
                 model.image = artist.image[3]['#text'];
             });
@@ -30,7 +29,6 @@
         lastFmService
             .findArtistTopAlbums(artistName)
             .then(function(albums) {
-                console.log(albums);
                 model.albums = albums;
             });
 
