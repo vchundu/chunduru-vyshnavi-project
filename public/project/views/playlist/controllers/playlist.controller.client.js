@@ -89,7 +89,7 @@
         }
 
         function showUnfollow() {
-            return !model.showFollow && currentUser._id !== playlist._userCreated;
+            return !model.showFollow && currentUser._id !== model.playlist._userCreated;
         }
 
     }
