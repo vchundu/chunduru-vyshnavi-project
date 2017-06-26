@@ -20,7 +20,7 @@ var userSchema = mongoose.Schema({
     _playlists: [
         {type: mongoose.Schema.Types.ObjectId, ref: "PlaylistModel"}
     ],
-    roles: [{type: String, default: 'ADMIN', enum: ['USER', 'ADMIN']}]
+    roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}]
 }, {collection: "user"});
 
 module.exports =userSchema;
