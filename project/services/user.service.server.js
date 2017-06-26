@@ -212,7 +212,7 @@ function localStrategy(username, password, done) {
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    callbackURL  : "https://vyshnaviproject.herokuapp.com/auth/facebook/callback"
 };
 
 
