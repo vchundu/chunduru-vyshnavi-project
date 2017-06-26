@@ -19,6 +19,8 @@ userModel.unfollowPlaylist = unfollowPlaylist;
 userModel.addPlaylist = addPlaylist;
 userModel.searchUsers = searchUsers;
 userModel.findPlaylistsUserFollows = findPlaylistsUserFollows;
+userModel.findFollowers = findFollowers;
+userModel.findFollowing = findFollowing;
 
 module.exports = userModel;
 
@@ -140,5 +142,19 @@ function findPlaylistsUserFollows(userId) {
     return userModel
         .findById(userId)
         .populate("_playlists")
+        .exec();
+}
+
+function findFollowers(userId) {
+    return userModel
+        .findById(userId)
+        .populate("_followers")
+        .exec();
+}
+
+function findFollowing(userId) {
+    return userModel
+        .findById(userId)
+        .populate("_following")
         .exec();
 }

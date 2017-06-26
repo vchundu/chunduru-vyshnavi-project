@@ -11,8 +11,9 @@
             model.currentUser = currentUser;
             model.user = currentUser;
 
-            model.followers = currentUser._followers.length;
-            model.following = currentUser._following.length;
+            model.followerCount = currentUser._followers.length;
+            model.followingCount = currentUser._following.length;
+
             model.showFollow = false;
             model.showUnfollow = false;
             model.showEdit = true;
@@ -31,6 +32,19 @@
                 });
 
             model.logout = logoutService.logout;
+
+            userService
+                .findFollowing(currentUser._id)
+                .then(function(following) {
+                   model.following = following;
+                });
+
+            userService
+                .findFollowers(currentUser._id)
+                .then(function(followers) {
+                    model.followers = followers;
+                })
+
         }
         init();
 

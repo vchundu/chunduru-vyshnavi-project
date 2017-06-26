@@ -17,7 +17,9 @@
             followPlaylist: followPlaylist,
             unfollowPlaylist: unfollowPlaylist,
             updateUser: updateUser,
-            findPlaylistsUserFollows: findPlaylistsUserFollows
+            findPlaylistsUserFollows: findPlaylistsUserFollows,
+            findFollowers: findFollowers,
+            findFollowing: findFollowing
         };
 
         function findUserByUsername(username) {
@@ -134,6 +136,23 @@
             var url ="/api/project/user/playlists/follow/"+userId;
             return $http.get(url)
                 .then(function(response){
+                    return response.data;
+                })
+        }
+
+        function findFollowers(userId) {
+            var url = "/api/project/user/"+userId+"/followers";
+            return $http.get(url)
+                .then(function(response) {
+                    console.log(response.data);
+                    return response.data;
+                })
+        }
+
+        function findFollowing(userId) {
+            var url = "/api/project/user/"+userId+"/following";
+            return $http.get(url)
+                .then(function(response) {
                     console.log(response.data);
                     return response.data;
                 })

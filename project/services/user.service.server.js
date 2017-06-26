@@ -24,6 +24,8 @@ app.get('/api/project/admin/users', findAllUsers);
 app.get('/api/project/admin/user/:userId', findUserById);
 app.get('/api/project/search/users/:searchText', searchUsers);
 app.get('/api/project/user/playlists/follow/:userId', findPlaylistsUserFollows);
+app.get('/api/project/user/:userId/followers', findFollowers);
+app.get('/api/project/user/:userId/following', findFollowing);
 //posts
 app.post('/api/project/register', register);
 app.post('/api/project/login', passport.authenticate('local'), login);
@@ -132,6 +134,29 @@ function findPlaylistsUserFollows(req, res) {
         })
 }
 
+function findFollowers(req, res) {
+    var userId = req.params['userId'];
+    userModel
+        .findFollowers(userId)
+        .then(function(user) {
+            res.json(user._followers);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
+
+function findFollowing(req, res) {
+    var userId = req.params['userId'];
+    userModel
+        .findFollowing(userId)
+        .then(function(user) {
+            res.json(user._following);
+        }, function(error) {
+            res.sendStatus(404);
+        });
+}
+
 function register(req, res)  {
     var user = req.body;
     userModel
@@ -144,6 +169,7 @@ function register(req, res)  {
             res.sendStatus(404);
         });
 }
+
 
 function login(req, res) {
     res.json(req.user);

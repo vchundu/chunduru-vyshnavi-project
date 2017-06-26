@@ -29,21 +29,28 @@
                     <span class="glyphicon glyphicon-minus pull-left"></span>
                 </a>
 
-                <h4>Following {{model.following}}</h4>
-                <h4>Followed by {{model.followers}}</h4>
+                <h4>Following {{model.followingCount}}</h4>
+                <h4>Followed by {{model.followerCount}}</h4>
             </div>
 
         </div>
-
-
-
-
-
 
         <ul class="list-group">
             <li class="vs-active list-group-item">Public Playlists</li>
             <li class="list-group-item" ng-repeat="playlist in model.publicPlaylists">
                 <a href="#!/playlist/{{playlist._id}}">{{playlist.name}}</a></li>
+        </ul>
+
+        <ul class="list-group">
+            <li class="vs-active list-group-item">Followers</li>
+            <li class="list-group-item"
+                ng-repeat="follower in model.followers">{{follower}}</li>
+        </ul>
+
+        <ul class="list-group">
+            <li class="vs-active list-group-item">Following</li>
+            <li class="list-group-item"
+                ng-repeat="following in model.following">{{following}}</li>
         </ul>
     </div>
 
