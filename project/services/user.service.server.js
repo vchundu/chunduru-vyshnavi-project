@@ -121,7 +121,6 @@ function searchUsers(req, res) {
 }
 
 function findPlaylistsUserFollows(req, res) {
-    console.log('in server');
     var userId = req.params['userId'];
     userModel
         .findPlaylistsUserFollows(userId)
@@ -211,9 +210,9 @@ function localStrategy(username, password, done) {
 // facebook
 
 var facebookConfig = {
-    clientID     : "248821795602346",
-    clientSecret : "cf5d64e9bd59f22466baf885d334783c",
-    callbackURL  : "http://localhost:3000/auth/facebook/callback"
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
 };
 
 
@@ -313,7 +312,6 @@ function followPlaylist(req, res) {
 
 function unfollowPlaylist(req, res) {
 
-    console.log('made it to unfollow playlis servert');
     var ids = req.body;
     userModel
         .unfollowPlaylist(ids['userId'], ids['playlistId'])

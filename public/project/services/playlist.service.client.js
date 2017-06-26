@@ -3,16 +3,19 @@
         .module('VSpotify')
         .factory('playlistService', playlistService);
 
-    function playlistService(songService, $http) {
+    function playlistService($http) {
 
         return {
             findPlaylistsForUser: findPlaylistsForUser,
             findPublicPlaylistsForUser: findPublicPlaylistsForUser,
+            findOtherPublicPlaylists :findOtherPublicPlaylists,
             findPlaylistById: findPlaylistById,
-            findAlbumForSong: findAlbumForSong,
             createPlaylist : createPlaylist,
             removePlaylist: removePlaylist,
-            updatePlaylist: updatePlaylist
+            updatePlaylist: updatePlaylist,
+            findSuggestionsForPlaylist: findSuggestionsForPlaylist,
+            approveSuggestion : approveSuggestion,
+            discardSuggestion : discardSuggestion
         };
 
         function findPlaylistsForUser(userId) {
@@ -39,12 +42,7 @@
                 });
         }
 
-        function findAlbumForSong(songId) {
-            return songService.findAlbumForSong(songId);
-        }
-
         function createPlaylist(playlist) {
-            console.log('in client service');
             var url = "/api/project/playlist";
             return $http.post(url, playlist)
                 .then(function(response) {
@@ -67,6 +65,38 @@
                 .then(function(response) {
                     return response.data;
                 })
+        }
+
+        function findOtherPublicPlaylists(userId) {
+            var url = "/api/project/playlists/other/"+userId;
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function findSuggestionsForPlaylist(playlistId) {
+            var url = "/api/project/playlist/"+playlistId+"/suggestions";
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function approveSuggestion(playlistId, suggestion) {
+            var url = "/api/project/playlist/"+playlistId+"/suggestions/accept";
+            return $http.put(url,suggestion)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function discardSuggestion(suggestionId, playlistId) {
+            var url = "/api/project/playlist/"+playlistId+"/suggestions/discard/"+suggestionId;
+            return $http.put(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
 

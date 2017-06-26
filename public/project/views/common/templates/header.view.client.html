@@ -36,6 +36,10 @@
                        ng-if="model.currentUser.roles.indexOf('ADMIN') > -1">Admin</a></li>
 
                 <li><a class="navbar-brand"
+                       href="#!/suggestion"
+                       ng-if="model.currentUser._id">Suggest to Playlists</a></li>
+
+                <li><a class="navbar-brand"
                        ng-click="model.logout()"
                        ng-if="model.currentUser._id">Logout</a></li>
             </ul>

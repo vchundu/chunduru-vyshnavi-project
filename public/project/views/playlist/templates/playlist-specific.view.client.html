@@ -1,16 +1,16 @@
 <div ng-include="'views/common/templates/header.view.client.html'"></div>
 <div class="container-fluid">
-    <div class="col-md-4 hidden-sm hidden-xs">
+    <div class="col-sm-4 hidden-xs">
         <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
         <h1>{{model.playlist.name}}</h1>
         <a ng-click="model.followPlaylist()"
            class="btn btn-success"
            ng-if="model.showFollow">Follow Playlist</a>
         <a ng-click="model.unfollowPlaylist()"
            class="btn btn-danger"
-           ng-if="!model.showFollow">Unfollow Playlist</a>
+           ng-if="model.showUnfollow">Unfollow Playlist</a>
         <h3>
             <a href="#!/user/{{model.user}}">
                 Created by {{model.user}}
@@ -22,6 +22,13 @@
                       class="glyphicon glyphicon-pencil"></span>
             </a>
         </h3>
+
+        <h4>
+            <a href="#!/playlist/{{model.playlistId}}/suggestions"
+               ng-if="model.showSuggestions">
+                {{model.suggestions}} suggestions
+            </a>
+        </h4>
 
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="song in model.playlist._songs">

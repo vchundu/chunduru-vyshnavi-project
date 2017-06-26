@@ -17,6 +17,8 @@
 
             if(currentUser !== '0') {
                 model.currentUser = currentUser;
+                model.showUnfollow = false;
+                model.showFollow = false;
             }
 
             model.userId = currentUser._id;
@@ -24,18 +26,26 @@
             playlistService
                 .findPlaylistById(model.playlistId)
                 .then(function(playlist) {
+
                     model.playlist = playlist;
+                    model.suggestions = playlist._suggestions.length;
+                    model.showSuggestions = playlist._userCreated === currentUser._id;
+
+                    if (currentUser !== '0') {
+                        model.showFollow = showFollow();
+                        model.showUnfollow = showUnfollow();
+                    }
+
                     return userService.findUserById(playlist._userCreated);
                 })
                 .then(function(user) {
                     model.user = user.username;
-                    if (currentUser !== '0') {
-                        model.showEdit = user._id === currentUser._id;
-                        model.showFollow = user._id !== currentUser._id;
-                        console.log(model.showFollow);
-                    } else {
+                    if (currentUser === '0') {
                         model.showEdit = false;
                         model.showFollow = false;
+                        model.showUnfollow = false;
+                    } else {
+                        model.showEdit = user._id === currentUser._id;
                     }
                 });
 
@@ -71,6 +81,15 @@
                 .then(function(response) {
                     model.showFollow = true;
                 });
+        }
+
+        function showFollow() {
+            return model.playlist._followedBy.indexOf(currentUser._id) === -1
+                && currentUser._id !== model.playlist._userCreated;
+        }
+
+        function showUnfollow() {
+            return !model.showFollow && currentUser._id !== playlist._userCreated;
         }
 
     }

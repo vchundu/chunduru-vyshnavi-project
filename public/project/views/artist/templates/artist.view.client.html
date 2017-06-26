@@ -5,25 +5,37 @@
         <div ng-include="'views/playlist/templates/playlist-list.view.client.html'"></div>
     </div>
     <div class="col-sm-8">
-        <img ng-src="{{model.image}}" alt="">
-        <h1>{{model.artist.name}}</h1>
-
-        <div class="col-md-6">
-            <ul class="list-group">
-                <li class="vs-active list-group-item">Top Tracks</li>
-                <li class="list-group-item"
-                    ng-repeat="track in model.tracks">{{track.name}}</li>
-            </ul>
+        <div class="row">
+            <div class="col-sm-7">
+                <h1>{{model.artist.name}}</h1>
+                <h3>{{model.artist.stats.listeners}} Listeners</h3>
+                <h3>{{model.artist.stats.playcount}} Playcount</h3>
+            </div>
+            <div class="col-sm-5">
+                <img ng-src="{{model.image}}" alt="">
+            </div>
         </div>
 
-        <div class="col-md-6">
-            <ul class="list-group">
-                <li class="vs-active list-group-item">Top Albums</li>
-                <li class="list-group-item"
-                    ng-repeat="album in model.albums">
-                    <span ng-click="model.goToAlbum(album)">{{album.name}}</span>
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-group">
+                    <li class="vs-active list-group-item">Top Tracks</li>
+                    <li class="list-group-item"
+                        ng-repeat="track in model.tracks">{{track.name}}</li>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-group">
+                    <li class="vs-active list-group-item">Top Albums</li>
+                    <li class="list-group-item"
+                        ng-repeat="album in model.albums">
+                        <a ng-click="model.goToAlbum(album)">
+                            {{album.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </div>
 </div>

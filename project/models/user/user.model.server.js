@@ -108,7 +108,6 @@ function followPlaylist(userId, playlistId) {
 }
 
 function unfollowPlaylist(userId, playlistId) {
-    console.log('made it to user model');
     return userModel
         .findById(userId)
         .then(function(user) {

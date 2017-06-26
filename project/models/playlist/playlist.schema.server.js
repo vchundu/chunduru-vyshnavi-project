@@ -12,6 +12,9 @@ var playlistSchema = mongoose.Schema({
     _songs: [songSchema],
     _followedBy: [
         {type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}
+    ],
+    _suggestions: [
+        {type: mongoose.Schema.Types.ObjectId, ref: "SuggestionModel"}
     ]
 }, {collection: "playlist"});
 

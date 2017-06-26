@@ -1,0 +1,16 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <h1>View Suggestions</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="suggestion in model.suggestions">
+            {{model.getSongs(suggestion)}}
+            <span class="glyphicon glyphicon-minus pull-right"
+                  ng-click="model.discardSuggestion($index)"></span>
+            <span class="glyphicon glyphicon-ok pull-right"
+                  ng-click="model.approveSuggestion($index)"></span>
+        </li>
+    </ul>
+</div>

@@ -36,7 +36,6 @@
             userService
                 .findPlaylistsUserFollows(currentUser._id)
                 .then(function(playlists) {
-                    console.log('found playlists');
                     model.followPlaylists = playlists;
                 });
         }

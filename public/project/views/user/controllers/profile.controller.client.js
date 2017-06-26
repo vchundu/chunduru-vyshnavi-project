@@ -13,8 +13,10 @@
 
             model.followers = currentUser._followers.length;
             model.following = currentUser._following.length;
+            model.showFollow = false;
+            model.showUnfollow = false;
             // model.image = currentUser.image;
-            model.image = "http://lorempixel.com/300/300/"
+            model.image = "http://lorempixel.com/300/300/";
             playlistService
                 .findPublicPlaylistsForUser(model.userId)
                 .then(function(publicPlaylists) {

@@ -130,6 +130,22 @@
                 resolve: {
                     currentUser: checkAnonymous
                 }
+            })
+            .when('/suggestion', {
+                templateUrl: 'views/suggestion/templates/create-suggestion.view.client.html',
+                controller: 'createSuggestionController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/playlist/:playlistId/suggestions', {
+                templateUrl: 'views/suggestion/templates/suggestion-list.view.client.html',
+                controller: 'suggestionListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             });
     }
 

@@ -27,6 +27,7 @@
                 .findArtist(artistName)
                 .then(function(artist) {
                     model.artist = artist;
+                    console.log(model.artist);
                     model.image = artist.image[3]['#text'];
                 });
 

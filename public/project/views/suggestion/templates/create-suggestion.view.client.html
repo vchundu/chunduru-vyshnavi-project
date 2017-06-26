@@ -1,0 +1,64 @@
+<div ng-include="'views/common/templates/header.view.client.html'"></div>
+
+<div class="container-fluid">
+    <h1>Make a Suggestion</h1>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Add Song</h2>
+
+            <label for="title">Title</label>
+            <input type="text"
+                   id="title"
+                   ng-model="song.track"
+                   class="form-control">
+
+            <label for="artist">Artist</label>
+            <input type="text"
+                   id="artist"
+                   ng-model="song.artist"
+                   class="form-control">
+
+            <a ng-click="model.addSong(song)"
+               class="btn btn-block btn-warning">Add Song</a>
+
+            <ul class="list-group">
+                <li class="vs-active list-group-item">Available Playlists</li>
+                <li class="list-group-item"
+                    ng-repeat="playlist in model.publicPlaylists">
+                    <strong>{{playlist.name}} </strong> by {{playlist._userCreated.username}}
+                    <span class="glyphicon glyphicon-ok pull-right"
+                          ng-click="model.selectPlaylist($index)"></span>
+                </li>
+            </ul>
+            <a ng-click="model.makeSuggestion(model.songs, model.selectedPlaylists)"
+               class="btn btn-block btn-success">Create Suggestion</a>
+        </div>
+
+        <div class="col-sm-6">
+            <ul class="list-group">
+                <li class="list-group-item vs-active">Selected Songs</li>
+                <li class="list-group-item"
+                    ng-repeat="song in model.songs">
+                    <em>{{song.track}}</em> by {{song.artist}}
+                    <span class="glyphicon-remove glyphicon pull-right"
+                          ng-click="model.removeSong($index)"></span>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <li class="list-group-item vs-active">Selected Playlists</li>
+                <li class="list-group-item"
+                    ng-repeat="playlist in model.selectedPlaylists">
+                    <strong> {{playlist.name}} </strong> by {{playlist._userCreated.username}}
+                    <span class="glyphicon glyphicon-remove pull-right"
+                          ng-click="model.deselectPlaylist($index)"></span>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+
+
+</div>

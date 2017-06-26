@@ -50,7 +50,6 @@
         function getLink(type, name) {
             name = name.split(" ").join("-");
             var url = "/"+type+'/'+name;
-            console.log(url);
             $location.url(url);
         }
     }

@@ -1,10 +1,7 @@
 <div ng-include="'views/common/templates/header.view.client.html'"></div>
 
 <div class="container-fluid">
-    <div class="col-sm-4 hidden-xs">
-        <div ng-include="'views/admin/templates/includes/admin-playlists-list.view.client.html'"></div>
-    </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
         <h1>{{model.title}}</h1>
 
         <label for="name">Name of Playlist</label>
@@ -42,8 +39,11 @@
            ng-if="model.isNew"
            class="btn btn-block btn-success">Create Playlist</a>
 
+    </div>
+
+    <div class="col-sm-6">
         <ul class="list-group">
-            <li class="active list-group-item">Songs in Playlist</li>
+            <li class="vs-active list-group-item">Songs in Playlist</li>
             <li class="list-group-item"
                 ng-repeat="song in model.playlist._songs">
                 <em>{{song.track}}</em> by {{song.artist}}
@@ -51,6 +51,5 @@
                       ng-click="model.removeSong($index)"></span>
             </li>
         </ul>
-
     </div>
 </div>

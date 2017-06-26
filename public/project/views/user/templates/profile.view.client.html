@@ -17,14 +17,14 @@
                     <span class="glyphicon glyphicon-pencil pull-right"></span>
                 </a>
                 <a ng-click="model.followUser()"
-                   ng-if="!model.isFollow"
-                   class="btn btn-sm btn-default">
+                   ng-if="model.showFollow"
+                   class="btn btn-sm btn-success">
                     Follow
                     <span class="glyphicon glyphicon-plus pull-left"></span>
                 </a>
                 <a ng-click="model.unfollowUser()"
-                   ng-if="model.isFollow"
-                   class="btn btn-sm btn-default">
+                   ng-if="model.showUnfollow"
+                   class="btn btn-sm btn-danger">
                     Unfollow
                     <span class="glyphicon glyphicon-minus pull-left"></span>
                 </a>
@@ -32,9 +32,7 @@
                 <h4>Following {{model.following}}</h4>
                 <h4>Followed by {{model.followers}}</h4>
             </div>
-            <div class="col-sm-5">
-                <img src="http://lorempixel.com/300/300/" alt="">
-            </div>
+
         </div>
 
 

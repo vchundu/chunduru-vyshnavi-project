@@ -20,7 +20,6 @@
             lastFmService
                 .findAlbum(albumArtist, albumTitle)
                 .then(function(album) {
-                    console.log(album);
                     model.album = album;
                     model.image = model.album.image[3]['#text'];
                     model.songs = album.tracks.track;

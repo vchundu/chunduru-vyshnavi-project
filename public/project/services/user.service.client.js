@@ -111,7 +111,6 @@
         }
 
         function unfollowPlaylist(userId, playlistId) {
-            console.log('service clien');
             var url = "/api/project/user/playlist/unfollow";
             var ids = {
                 "userId":userId,
@@ -132,7 +131,6 @@
         }
 
         function findPlaylistsUserFollows(userId) {
-            console.log('in client service');
             var url ="/api/project/user/playlists/follow/"+userId;
             return $http.get(url)
                 .then(function(response){

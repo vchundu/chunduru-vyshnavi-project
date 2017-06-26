@@ -30,7 +30,8 @@
                     model.followers = user._followers.length;
                     model.following = user._following.length;
                     if (currentUser !== '0') {
-                        model.isFollow = currentUser._following.indexOf(user._id) > -1;
+                        model.showUnfollow = currentUser._following.indexOf(user._id) > -1;
+                        model.showFollow = !model.showUnfollow;
                     }
                     return playlistService
                         .findPublicPlaylistsForUser(user._id);
@@ -45,7 +46,8 @@
             userService
                 .followUser(currentUser._id, model.user._id)
                 .then(function(response) {
-                    model.isFollow = true;
+                    model.showUnfollow = true;
+                    model.showFollow = false;
                 });
         }
 
@@ -53,7 +55,9 @@
             userService
                 .unfollowUser(currentUser._id, model.user._id)
                 .then(function(response) {
-                    model.isFollow = false;
+                    model.showFollow = true;
+                    model.showUnfollow = false;
+
                 });
         }
     }

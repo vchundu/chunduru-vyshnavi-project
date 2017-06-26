@@ -29,15 +29,6 @@
                ng-model="model.isPublic"
                ng-if="model.currentUser._id">
 
-        <label for="tag">Tag</label>
-        <input type="text"
-               id="tag"
-               class="form-control"
-               ng-model="tag">
-
-        <a ng-click="model.addTag(tag)"
-           class="btn btn-block btn-danger">Add Tag</a>
-
         <a ng-click="model.addSong(track, artist)"
            class="btn btn-block btn-warning">Add To Playlist</a>
 
@@ -47,11 +38,6 @@
     </div>
 
     <div class="col-sm-6">
-        <ul class="list-group">
-            <li class="vs-active list-group-item">Tags</li>
-            <li class="list-group-item"
-                ng-repeat="tag in model.tags">{{tag.name}}</li>
-        </ul>
         <ul class="list-group">
             <li class="vs-active list-group-item">Currently In {{title}}</li>
             <li class="list-group-item"

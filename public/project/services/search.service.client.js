@@ -22,7 +22,6 @@
         }
 
         function searchUsers(searchText) {
-            console.log('in search users');
             var url = "/api/project/search/users/"+searchText;
             return $http.get(url)
                 .then(function(response) {
