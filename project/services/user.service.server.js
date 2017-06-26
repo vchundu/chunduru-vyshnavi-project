@@ -134,7 +134,6 @@ function findPlaylistsUserFollows(req, res) {
 
 function register(req, res)  {
     var user = req.body;
-    user.roles.push('ADMIN');
     userModel
         .createUser(user)
         .then(function (user) {

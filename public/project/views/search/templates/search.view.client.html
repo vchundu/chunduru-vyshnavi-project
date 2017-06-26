@@ -32,8 +32,9 @@
                 <li class="vs-active list-group-item">Artists</li>
                 <li class="list-group-item"
                     ng-repeat="artist in model.artists">
-                    <span ng-click="model.getLink('artist', artist.name)"></span>
-                    {{artist.name}}
+                    <a ng-click="model.getLink('artist', artist.name)">
+                        {{artist.name}}
+                    </a>
                 </li>
             </ul>
             <a class="btn btn-block btn-info">See More Artists</a>
@@ -44,8 +45,10 @@
                 <li class="list-group-item vs-active">Albums</li>
                 <li class="list-group-item"
                     ng-repeat="album in model.albums">
-                    <span ng-click="model.getLink('album', album.name)"></span>
-                    <em>{{album.name}}</em> by {{album.artist}}</li>
+                    <a ng-click="model.getLink('album', album.name)">
+                        <em>{{album.name}}</em> by {{album.artist}}
+                    </a>
+                </li>
             </ul>
             <a class="btn btn-block btn-info">See More Albums</a>
 
