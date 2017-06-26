@@ -44,13 +44,21 @@
         <ul class="list-group">
             <li class="vs-active list-group-item">Followers</li>
             <li class="list-group-item"
-                ng-repeat="follower in model.followers">{{follower}}</li>
+                ng-repeat="follower in model.followers">
+                <a href="#!/user/{{follower.username}}">
+                    {{follower.username}}
+                </a>
+            </li>
         </ul>
 
         <ul class="list-group">
             <li class="vs-active list-group-item">Following</li>
             <li class="list-group-item"
-                ng-repeat="following in model.following">{{following}}</li>
+                ng-repeat="following in model.following">
+                <a href="#!/user/{{following.username}}">
+                    {{following}}
+                </a>
+            </li>
         </ul>
     </div>
 
