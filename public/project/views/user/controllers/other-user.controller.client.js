@@ -11,6 +11,7 @@
             model.logout = logoutService.logout;
             model.followUser = followUser;
             model.unfollowUser = unfollowUser;
+            model.showEdit = false;
 
             if (currentUser !== '0') {
                 model.currentUser = currentUser;

@@ -15,6 +15,7 @@
             model.following = currentUser._following.length;
             model.showFollow = false;
             model.showUnfollow = false;
+            model.showEdit = true;
             // model.image = currentUser.image;
             model.image = "http://lorempixel.com/300/300/";
             playlistService
