@@ -212,9 +212,15 @@ function localStrategy(username, password, done) {
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : "https://vyshnaviproject.herokuapp.com/auth/facebook/callback"
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
 };
 
+//
+// var facebookConfig = {
+//     clientID     : "248821795602346",
+//     clientSecret : "cf5d64e9bd59f22466baf885d334783c",
+//     callbackURL  : "http://localhost:3000/auth/facebook/callback"
+// };
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
