@@ -10,6 +10,7 @@
         model.playlistId = $routeParams['playlistId'];
 
         function init() {
+            model.userId = currentUser._id;
             model.logout = logoutService.logout;
             model.goToArtist = goToArtist;
             model.followPlaylist = followPlaylist;
